@@ -1,0 +1,296 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.sealion.serviceassistant"
+    android:versionCode="108"
+    android:versionName="1.0.8" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="11" />
+
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <permission android:name="android.permission.BAIDU_LOCATION_SERVICE" >
+    </permission>
+
+    <uses-permission android:name="android.permission.BAIDU_LOCATION_SERVICE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.READ_LOGS" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    <uses-permission android:name="android.permission.RESTART_PACKAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <!-- 照相机权限 -->
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <application
+        android:name="com.sealion.serviceassestant.app.ServiceManageApplication"
+        android:icon="@drawable/aisino_logo"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.NoTitleBar"
+        android:allowBackup="true" >
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5346137f56240b07070c81a1" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="user"  />
+
+        <service
+            android:name="com.umeng.common.net.DownloadingService"
+            android:process=":DownloadingService" >
+        </service>
+
+        <activity
+            android:name="com.umeng.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".LoadingPageActivity"
+            android:alwaysRetainTaskState="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:alwaysRetainTaskState="true"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:alwaysRetainTaskState="true"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".DesktopActivity"
+            android:alwaysRetainTaskState="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".HomeActivity"
+            android:alwaysRetainTaskState="true"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".NoticeActivity"
+            android:alwaysRetainTaskState="true"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".OrderListActivity"
+            android:alwaysRetainTaskState="true"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".OrderDetailActivity"
+            android:alwaysRetainTaskState="true"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".AboutActivity"
+            android:alwaysRetainTaskState="true"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".ChangePwdActivity"
+            android:alwaysRetainTaskState="true"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".NoticeDetailActivity"
+            android:alwaysRetainTaskState="true"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".SolvePaperActivity"
+            android:alwaysRetainTaskState="true"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".PhoneSolveFormActivity"
+            android:alwaysRetainTaskState="true"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".ChangeOrderFormActivity"
+            android:alwaysRetainTaskState="true"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".ChangeCustomerInfoActivity"
+            android:alwaysRetainTaskState="true"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".BusLineSearch"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".SoundRecorderActivity"
+            android:alwaysRetainTaskState="true"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".MaxImageActivity"
+            android:alwaysRetainTaskState="true"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".OrderDetailViewActivity"
+            android:alwaysRetainTaskState="true"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".OrderFileUploadActivity"
+            android:alwaysRetainTaskState="true"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".SettingActivity"
+            android:alwaysRetainTaskState="true"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".TimeSelectPreferenceActivity"
+            android:alwaysRetainTaskState="true"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".CompleteOrderPanelActivity"
+            android:alwaysRetainTaskState="true"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".PhoneSolvePanelActivity"
+            android:alwaysRetainTaskState="true"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".CheckQuestionActivity"
+            android:alwaysRetainTaskState="true"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".ReceiptBaseInfoActivity"
+            android:alwaysRetainTaskState="true"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".AnswerQuestionActivity"
+            android:alwaysRetainTaskState="true"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".AudioAndPictureActivity"
+            android:alwaysRetainTaskState="true"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".BTPrinterActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".DeviceListActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/select_device"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".SoundRecorder"
+            android:configChanges="keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.GET_CONTENT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.OPENABLE" />
+
+                <data android:mimeType="audio/amr" />
+                <data android:mimeType="audio/3gpp" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.provider.MediaStore.RECORD_SOUND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SoundRecorderPreferenceActivity"
+            android:label="@string/preferences_title"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+
+        <service
+            android:name="com.sealion.serviceassistant.recorder.RecorderService"
+            android:exported="false" >
+        </service>
+        <!--
+        <service
+            android:name="com.sealion.serviceassistant.mqtt.PushService"
+            android:exported="false"
+            android:label="Push Notifications Service"
+            android:process=":remotemqtt" >
+            <intent-filter>
+                <action android:name="com.sealion.serviceassistant.mqtt.IMqttClient" >
+                </action>
+            </intent-filter>
+        </service>
+        -->
+
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:permission="android.permission.BAIDU_LOCATION_SERVICE"
+            android:process=":remote" >
+            <intent-filter>
+                <action android:name="com.baidu.location.service_v2.4" >
+                </action>
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.sealion.serviceassistant.gps.GpsService"
+            android:exported="false"
+            android:process=":gpsupload" >
+        </service>
+        <service
+            android:name="com.sealion.serviceassistant.mqtt.MQTTService"
+            android:label="Push Notifications Service" />
+    </application>
+
+</manifest>

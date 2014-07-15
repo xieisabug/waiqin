@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <drawable name="panel_bg">#F0EFEF</drawable>
+    <drawable name="small_banner_color">#666666</drawable>
+    <drawable name="white">#FFFFFF</drawable>
+    <drawable name="dialog_transparent">#900000</drawable>
+    <drawable name="complete_panel_bg">#F0EFEF</drawable>
+    <drawable name="content_panel_bg">#EFEFEF</drawable>
+    <color name="shape_stroke">#9E9A9A</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="print_bg">#EFEFEF</color>
+    <color name="baidu_blue">#2319DC</color>
+</resources>

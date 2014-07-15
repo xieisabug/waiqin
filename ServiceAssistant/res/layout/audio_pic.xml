@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+	<RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dip"
+        android:background="@drawable/basic_infor_bg" >
+
+        <TextView
+            style="@style/order_detail.baseinfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dip"
+            android:text="@string/photo" />
+    </RelativeLayout>
+
+    <com.sealion.serviceassistant.widget.GridViewList
+        android:id="@+id/view_image_gridview"
+        android:layout_width="fill_parent"
+        android:layout_height="160dip"
+        android:layout_marginTop="2dip"
+        android:gravity="center"
+        android:horizontalSpacing="3dp"
+        android:numColumns="2"
+        android:verticalSpacing="2dp" >
+    </com.sealion.serviceassistant.widget.GridViewList>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/basic_infor_bg" >
+
+        <TextView
+            style="@style/order_detail.baseinfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dip"
+            android:text="@string/audio" />
+    </RelativeLayout>
+
+    <com.sealion.serviceassistant.widget.GridViewList
+        android:id="@+id/view_audio_gridview"
+        android:layout_width="fill_parent"
+        android:layout_height="160dip"
+        android:layout_marginTop="2dip"
+        android:gravity="center"
+        android:horizontalSpacing="3dp"
+        android:numColumns="2"
+        android:verticalSpacing="2dp" >
+    </com.sealion.serviceassistant.widget.GridViewList>
+</LinearLayout>

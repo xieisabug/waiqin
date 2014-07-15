@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="screen_list">
+
+    <PreferenceCategory
+            android:title="基本时间间隔设置">
+    <ListPreference
+        android:defaultValue="@array/tips_time"
+        android:dialogTitle="时间选择"
+        android:entries="@array/tips_time"
+        android:entryValues="@array/tips_time_value"
+        android:key="timeSelectListPreference"
+        android:title="提醒时间间隔设置" 
+        android:summary="软件将会按照该时间间隔进行未读工单提醒">
+        
+    </ListPreference>
+
+    </PreferenceCategory>
+</PreferenceScreen>

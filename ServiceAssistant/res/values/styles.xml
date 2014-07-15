@@ -1,0 +1,233 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="AppTheme" parent="android:Theme.Light" />
+
+    <!-- =============================登录界面============================= -->
+    
+	<style name="login"><!-- 登录界面字体属性的根类 -->
+	    <item name="android:textStyle">bold</item>
+	</style>
+    
+    <style name="login.welcome"><!-- 登录界面字体标题颜色 -->
+        <item name="android:textColor">#33CCCC</item>
+        <item name="android:textSize">26sp</item>
+    </style>
+    
+	<style name="login.contentColor"><!-- 登录界面内容字体颜色 -->
+	    <item name="android:textColor">#000000</item>
+    </style>
+	
+	 <!-- 登录界面内容字体(帐号和密码，记住密码，忘记密码)大小-->
+	<style name="login.contentColor.contentTitle">
+	    <item name="android:textSize">16sp</item>
+	</style>
+	
+	<!-- 登录界面内容字体(填写的帐号和密码)大小 -->
+	<style name="login.contentColor.edittext">
+	    <item name="android:textSize">14sp</item>
+	</style>
+	
+	<!-- 登录界面内容字体(按钮)大小 -->
+	<style name="login.Btn">
+	    <item name="android:textSize">20sp</item>
+	</style>
+	
+	<!-- ================================================================== -->
+	
+	<!-- =============================主页界面============================= -->
+	<style name="home">
+	    <item name="android:textStyle">bold</item>
+	    <item name="android:textColor">#000000</item>
+	</style>
+	
+	<style name="home.title">
+	    <item name="android:textSize">14sp</item>
+	</style>
+	
+	<style name="home.order_content">
+	    <item name="android:textSize">20sp</item>
+	</style>
+	
+	<style name="home.notice_title">
+	    <item name="android:textSize">16sp</item>
+	</style>
+	
+	<style name="home.notice_time">
+	    <item name="android:textSize">14sp</item>
+	</style>
+	
+	<style name="home.menu">
+	    <item name="android:textSize">10sp</item>
+	</style>
+	<!-- ================================================================== -->
+	
+	<!-- =============================关于界面============================= -->
+	<style name="about">
+	    <item name="android:textStyle">bold</item>
+	    <item name="android:textColor">#000000</item>
+	</style>
+	
+	<style name="about.content_title">
+	    <item name="android:textSize">20sp</item>
+	</style>
+	
+	<style name="about.content">
+	    <item name="android:textSize">16sp</item>
+	</style>
+	<!-- ================================================================== -->
+	
+	<!-- =============================修改密码============================= -->
+	<style name="changepwd">
+	    <item name="android:textStyle">bold</item>
+	    <item name="android:textColor">#000000</item>
+	</style>
+	
+	<style name="changepwd.title">
+	    <item name="android:textSize">15sp</item>
+	</style>
+	
+	<style name="changepwd.confirm">
+	    <item name="android:textSize">18sp</item>
+	</style>
+	<!-- ================================================================== -->
+	
+	<!-- ==============================通知列表================================ -->
+	<style name="notice">
+	    <item name="android:textStyle">bold</item>
+	</style>
+	
+	<style name="notice.title">
+	    <item name="android:textColor">#000000</item>
+	    <item name="android:textSize">18sp</item>
+	</style>
+	
+	<style name="notice.time">
+	    <item name="android:textColor">#000000</item>
+	    <item name="android:textSize">14sp</item>
+	</style>
+	<!-- ================================================================== -->
+	
+	<!-- ==============================工单列表============================ -->
+	<style name="order_list">
+	    <item name="android:textStyle">bold</item>   
+	</style>
+	
+	<style name="order_list.content">
+	    <item name="android:textColor">#000000</item>
+	</style>
+	
+	<style name="order_list.content.number">
+	    <item name="android:textSize">18sp</item>
+	</style>
+	
+	<style name="order_list.content.time">
+	    <item name="android:textSize">10sp</item>
+	</style>
+	
+	<style name="order_list.content.content">
+	    <item name="android:textSize">14sp</item>
+	</style>
+	
+	<!-- ================================================================== -->
+	
+	<!-- ==============================工单详情================================ -->
+	<style name="order_detail">
+	    <item name="android:textStyle">bold</item>
+	</style>
+	
+	<style name="order_detail.title">
+	    <item name="android:textColor">#FFFFFF</item>
+	    <item name="android:textSize">20sp</item>
+	</style>
+	
+	<style name="order_detail.state">
+	    <item name="android:textColor">#000000</item>
+	    <item name="android:textSize">12sp</item>
+	</style>
+	
+	<style name="order_detail.baseinfo_title">
+	    <item name="android:textColor">#2319DC</item>
+	    <item name="android:textSize">18sp</item>
+	</style>
+	
+	<style name="order_detail.baseinfo">
+	    <item name="android:textColor">#000000</item>
+	    <item name="android:textSize">14sp</item>
+	</style>
+	
+	<style name="order_detail.menu">
+	    <item name="android:textColor">#FFFFFF</item>
+	    <item name="android:textSize">14sp</item>
+	</style>
+	
+	<style name="order_detail.content_title">
+	    <item name="android:textColor">#000000</item>
+	    <item name="android:textSize">14sp</item>
+	</style>
+	
+	<style name="order_detail.content_value">
+	    <item name="android:textColor">#000000</item>
+	    <item name="android:textSize">14sp</item>
+	</style>
+	
+	
+	<!-- ===================================================================== -->
+	
+	<!-- ===============================悬浮菜单按钮=========================== -->
+	<style name="pop_menu">
+	    <item name="android:textStyle">bold</item>
+	</style>
+	<style name="pop_menu.content_title">
+	    <item name="android:textColor">#FFFFFF</item>
+	    <item name="android:textSize">10sp</item>
+	</style>
+	<!-- ===================================================================== -->
+	
+	<!-- ===============================电话解决问题回单=========================== -->
+	<style name="phone_solve_form">
+	    <item name="android:textStyle">bold</item>
+	</style>
+	<style name="phone_solve_form.title">
+	    <item name="android:textSize">14sp</item>
+	    <item name="android:textColor">#000000</item>
+	</style>
+	<!-- ================================================================== -->
+	
+	<!-- ===============================电话解决问题回单=========================== -->
+	<style name="change_customer_info">
+	    <item name="android:textStyle">bold</item>
+	</style>
+	<style name="change_customer_info.title">
+	    <item name="android:textSize">14sp</item>
+	    <item name="android:textColor">#000000</item>
+	</style>
+	<!-- ================================================================== -->
+	
+	<!-- =================================Order View======================= -->
+	<style name="order_view">
+	    <item name="android:textStyle">bold</item>
+	</style>
+	<style name="order_view.text">
+	    <item name="android:textSize">14sp</item>
+	    <item name="android:textColor">#000000</item>
+	</style>
+	<!-- ================================================================== -->
+	
+	<!-- =================================Setting======================= -->
+	<style name="setting">
+	    <item name="android:textStyle">bold</item>
+	</style>
+	<style name="setting.content_text">
+	    <item name="android:textSize">16sp</item>
+	    <item name="android:textColor">#000000</item>
+	</style>
+	<!-- ================================================================== -->
+	
+	<!-- =================================Shape tips======================= -->
+	<style name="shape_tips">
+	    <item name="android:textStyle">bold</item>
+	    <item name="android:textSize">26sp</item>
+	    <item name="android:textColor">#000000</item>
+	</style>
+	<!-- ================================================================== -->
+</resources>

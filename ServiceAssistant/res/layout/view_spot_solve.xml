@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/panel_bg"
+    android:orientation="vertical" >
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dip"
+        android:layout_marginRight="15dip"
+        android:layout_marginTop="5dip"
+        android:background="#4E4D4E"
+        android:shrinkColumns="0" >
+
+        <TableRow
+            android:layout_margin="1dip"
+            android:background="#F0EFEF" >
+
+            <TextView
+                style="@style/order_detail.content_title"
+                android:layout_width="110dip"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/receipt_base_customer_name" />
+
+            <TextView
+                android:id="@+id/receipt_base_customer_name_value"
+                style="@style/order_view.text"
+                android:layout_width="180dip"
+                android:layout_marginLeft="3dip"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="1dip"
+            android:background="#F0EFEF" >
+
+            <TextView
+                android:id="@+id/is_solve_text"
+                style="@style/order_detail.content_title"
+                android:layout_width="110dip"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/receipt_base_customer_tax" />
+
+            <TextView
+                android:id="@+id/receipt_base_customer_tax_value"
+                style="@style/order_view.text"
+                android:layout_width="180dip"
+                android:layout_marginLeft="3dip"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="1dip"
+            android:background="#F0EFEF" >
+
+            <TextView
+                style="@style/order_detail.content_title"
+                android:layout_width="110dip"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/receipt_base_tax_officer" />
+
+            <TextView
+                android:id="@+id/receipt_base_tax_officer_value"
+                style="@style/order_view.text"
+                android:layout_width="180dip"
+                android:layout_marginLeft="3dip"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="1dip"
+            android:background="#F0EFEF" >
+
+            <TextView
+                style="@style/order_detail.content_title"
+                android:layout_width="110dip"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/receipt_base_service_address" />
+
+            <TextView
+                android:id="@+id/receipt_base_service_address_value"
+                style="@style/order_view.text"
+                android:layout_width="180dip"
+                android:layout_marginLeft="3dip"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="1dip"
+            android:background="#F0EFEF" >
+
+            <TextView
+                style="@style/order_detail.content_title"
+                android:layout_width="110dip"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/receipt_base_contact_name" />
+
+            <TextView
+                android:id="@+id/receipt_base_contact_name_value"
+                style="@style/order_view.text"
+                android:layout_width="180dip"
+                android:layout_marginLeft="3dip"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="1dip"
+            android:background="#F0EFEF" >
+
+            <TextView
+                style="@style/order_detail.content_title"
+                android:layout_width="110dip"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/receipt_base_customer_tel" />
+
+            <TextView
+                android:id="@+id/receipt_base_customer_tel_value"
+                style="@style/order_view.text"
+                android:layout_width="180dip"
+                android:layout_marginLeft="3dip"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="1dip"
+            android:background="#F0EFEF" >
+
+            <TextView
+                style="@style/order_detail.content_title"
+                android:layout_width="110dip"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/receipt_base_customer_mobile" />
+
+            <TextView
+                android:id="@+id/receipt_base_customer_mobile_value"
+                style="@style/order_view.text"
+                android:layout_width="180dip"
+                android:layout_marginLeft="3dip"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="1dip"
+            android:background="#F0EFEF" >
+
+            <TextView
+                style="@style/order_detail.content_title"
+                android:layout_width="110dip"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/receipt_base_number" />
+
+            <TextView
+                android:id="@+id/receipt_base_number_value"
+                style="@style/order_view.text"
+                android:layout_width="180dip"
+                android:layout_marginLeft="3dip"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="1dip"
+            android:background="#F0EFEF" >
+
+            <TextView
+                style="@style/order_detail.content_title"
+                android:layout_width="110dip"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/receipt_base_customer_solve" />
+
+            <TextView
+                android:id="@+id/receipt_base_customer_solve_value"
+                style="@style/order_view.text"
+                android:layout_width="180dip"
+                android:layout_marginLeft="3dip"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/receipt_base_software_type_row"
+            android:layout_margin="1dip"
+            android:background="#F0EFEF"
+            android:visibility="gone" >
+
+            <TextView
+                style="@style/order_detail.content_title"
+                android:layout_width="110dip"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/receipt_base_software_type" />
+
+            <TextView
+                android:id="@+id/receipt_base_software_type_value"
+                style="@style/order_view.text"
+                android:layout_width="180dip"
+                android:layout_marginLeft="3dip"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/receipt_base_software_version_row"
+            android:layout_margin="1dip"
+            android:background="#F0EFEF"
+            android:visibility="gone" >
+
+            <TextView
+                style="@style/order_detail.content_title"
+                android:layout_width="110dip"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/receipt_base_software_version" />
+
+            <TextView
+                android:id="@+id/receipt_base_software_version_value"
+                style="@style/order_view.text"
+                android:layout_width="180dip"
+                android:layout_marginLeft="3dip"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/receipt_base_software_env_row"
+            android:layout_margin="1dip"
+            android:background="#F0EFEF"
+            android:visibility="gone" >
+
+            <TextView
+                style="@style/order_detail.content_title"
+                android:layout_width="110dip"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/receipt_base_software_env" />
+
+            <TextView
+                android:id="@+id/receipt_base_software_env_value"
+                style="@style/order_view.text"
+                android:layout_width="180dip"
+                android:layout_marginLeft="3dip"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/visit_type_row"
+            android:layout_margin="1dip"
+            android:background="#F0EFEF"
+            android:visibility="gone" >
+
+            <TextView
+                style="@style/order_detail.content_title"
+                android:layout_width="110dip"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/receipt_type" />
+
+            <TextView
+                android:id="@+id/receipt_type_value"
+                style="@style/order_view.text"
+                android:layout_width="180dip"
+                android:layout_marginLeft="3dip"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/product_case_row"
+            android:layout_margin="1dip"
+            android:background="#F0EFEF"
+            android:visibility="gone" >
+
+            <TextView
+                style="@style/order_detail.content_title"
+                android:layout_width="110dip"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/product_case" />
+
+            <TextView
+                android:id="@+id/product_case_value"
+                style="@style/order_view.text"
+                android:layout_width="180dip"
+                android:layout_marginLeft="3dip"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/dispose_result_row"
+            android:layout_margin="1dip"
+            android:background="#F0EFEF"
+            android:visibility="gone" >
+
+            <TextView
+                style="@style/order_detail.content_title"
+                android:layout_width="110dip"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/dispose_result" />
+
+            <TextView
+                android:id="@+id/dispose_result_value"
+                style="@style/order_view.text"
+                android:layout_width="180dip"
+                android:layout_marginLeft="3dip"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="1dip"
+            android:background="#F0EFEF" >
+
+            <TextView
+                style="@style/order_detail.content_title"
+                android:layout_width="110dip"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/receipt_base_customer_sign" />
+
+            <TextView
+                android:id="@+id/receipt_base_customer_sign_value"
+                style="@style/order_view.text"
+                android:layout_width="180dip"
+                android:layout_marginLeft="3dip"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="1dip"
+            android:background="#F0EFEF"
+            android:id="@+id/order_is_charge_row"
+            android:visibility="gone" >
+
+            <TextView
+                style="@style/order_detail.content_title"
+                android:layout_width="110dip"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/order_is_charge" />
+
+            <TextView
+                android:id="@+id/order_is_charge_value"
+                style="@style/order_view.text"
+                android:layout_width="180dip"
+                android:layout_marginLeft="3dip"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="1dip"
+            android:background="#F0EFEF"
+            android:id="@+id/order_charge_money_row"
+            android:visibility="gone"  >
+
+            <TextView
+                style="@style/order_detail.content_title"
+                android:layout_width="110dip"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/order_charge_money" />
+
+            <TextView
+                android:id="@+id/order_charge_money_value"
+                style="@style/order_view.text"
+                android:layout_width="180dip"
+                android:layout_marginLeft="3dip"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="1dip"
+            android:background="#F0EFEF" >
+
+            <TextView
+                style="@style/order_detail.content_title"
+                android:layout_width="110dip"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/is_upload_base_info" />
+
+            <TextView
+                android:id="@+id/is_upload_base_info_value"
+                style="@style/order_view.text"
+                android:layout_width="180dip"
+                android:layout_marginLeft="3dip"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="1dip"
+            android:background="#F0EFEF" >
+
+            <TextView
+                style="@style/order_detail.content_title"
+                android:layout_width="110dip"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/receipt_base_customer_remark" />
+
+            <TextView
+                android:id="@+id/receipt_base_customer_remark_value"
+                style="@style/order_view.text"
+                android:layout_width="180dip"
+                android:layout_marginLeft="3dip"
+                android:layout_height="wrap_content" />
+        </TableRow>
+    </TableLayout>
+
+    <LinearLayout
+        android:id="@+id/visit_paper_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_qa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/basic_infor_bg" >
+
+        <TextView
+            style="@style/order_detail.baseinfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dip"
+            android:text="@string/answer_question" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/q_a_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dip"
+        android:background="@drawable/basic_infor_bg" >
+
+        <TextView
+            style="@style/order_detail.baseinfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dip"
+            android:text="@string/receipt_fee" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/expense_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:layout_marginLeft="10dip"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/order_detail.content_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/receipt_base_customer_charge" />
+
+            <TextView
+                android:id="@+id/receipt_base_customer_charge_value"
+                style="@style/order_view.text"
+                android:layout_width="180dip"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dip"
+        android:background="@drawable/basic_infor_bg" >
+
+        <TextView
+            style="@style/order_detail.baseinfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dip"
+            android:text="@string/photo" />
+    </RelativeLayout>
+
+    <com.sealion.serviceassistant.widget.GridViewList
+        android:id="@+id/view_image_gridview"
+        android:layout_width="fill_parent"
+        android:layout_height="160dip"
+        android:layout_marginTop="2dip"
+        android:gravity="center"
+        android:horizontalSpacing="3dp"
+        android:numColumns="2"
+        android:verticalSpacing="2dp" >
+    </com.sealion.serviceassistant.widget.GridViewList>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/basic_infor_bg" >
+
+        <TextView
+            style="@style/order_detail.baseinfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dip"
+            android:text="@string/audio" />
+    </RelativeLayout>
+
+    <com.sealion.serviceassistant.widget.GridViewList
+        android:id="@+id/view_audio_gridview"
+        android:layout_width="fill_parent"
+        android:layout_height="160dip"
+        android:layout_marginTop="2dip"
+        android:gravity="center"
+        android:horizontalSpacing="3dp"
+        android:numColumns="2"
+        android:verticalSpacing="2dp" >
+    </com.sealion.serviceassistant.widget.GridViewList>
+
+</LinearLayout>

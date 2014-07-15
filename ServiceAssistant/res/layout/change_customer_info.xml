@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/panel_bg"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        layout="@layout/order_top_bar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:orientation="vertical" >
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dip"
+                android:layout_marginTop="30dip"
+                android:orientation="vertical" >
+
+                <RadioButton
+                    android:id="@+id/order_customer_address"
+                    style="@style/change_customer_info.title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/radio_btn_click"
+                    android:checked="true"
+                    android:text="@string/order_customer_chg" />
+
+                <EditText
+                    android:id="@+id/order_customer_address_edittext"
+                    android:layout_width="200dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dip"
+                    android:background="@drawable/edit_text_state_bg" />
+
+                <RadioButton
+                    android:id="@+id/gps_customer_address"
+                    style="@style/change_customer_info.title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/radio_btn_click"
+                    android:text="@string/gps_customer_address" />
+
+                <EditText
+                    android:id="@+id/gps_customer_address_edittext"
+                    android:layout_width="200dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dip"
+                    android:background="@drawable/edit_text_state_bg" />
+
+                <RadioButton
+                    android:id="@+id/input_customer_address"
+                    style="@style/change_customer_info.title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/radio_btn_click"
+                    android:text="@string/input_address" />
+
+                <EditText
+                    android:id="@+id/input_customer_address_edittext"
+                    android:layout_width="200dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dip"
+                    android:background="@drawable/edit_text_state_bg" />
+            </RadioGroup>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/normal_btn_click" 
+                android:text="@string/add_action"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dip"
+                android:onClick="AddBtnClick"/>
+            
+            
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/normal_btn_click" 
+                android:text="@string/cancel"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dip"
+                android:onClick="CancelBtnClick"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <include
+        android:layout_weight="1"
+        layout="@layout/order_bottom_bar" />
+
+</LinearLayout>

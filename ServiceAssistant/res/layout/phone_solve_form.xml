@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/panel_bg"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        layout="@layout/order_top_bar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dip"
+                android:layout_marginLeft="15dip"
+                android:layout_marginRight="15dip"
+                android:layout_marginTop="10dip"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/current_state" 
+                     style="@style/order_detail.state"/>
+
+                <TextView
+                    android:id="@+id/current_state_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dip"
+                    style="@style/order_detail.state"
+                    android:text="@string/phone_solve_back_paper"/>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dip"
+                android:layout_marginRight="15dip">
+
+                <TextView
+                    android:layout_alignParentLeft="true"
+                    android:layout_width="60dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/question_describe"
+                    style="@style/phone_solve_form.title"/>
+
+                <EditText
+                    android:id="@+id/question_describe_edittext"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text_bg" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dip"
+                android:layout_marginRight="15dip" >
+
+                <TextView
+                    android:layout_alignParentLeft="true"
+                    android:layout_width="60dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/solve_method" 
+                    style="@style/phone_solve_form.title"/>
+
+                <EditText
+                    android:id="@+id/solve_method_edittext"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text_bg" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dip"
+                android:layout_marginRight="15dip"
+                android:layout_marginTop="8dip"
+                android:orientation="horizontal"
+                android:gravity="center" >
+
+                <TextView
+                    android:layout_width="140dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/is_reorder" 
+                    style="@style/phone_solve_form.title"/>
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                     >
+
+                    <RadioButton
+                        android:id="@+id/radio_btn_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" 
+                        android:text="@string/yes"
+                        android:button="@drawable/radio_btn_click"/>
+
+                    <RadioButton
+                        android:id="@+id/radio_btn_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" 
+                        android:text="@string/no"
+                        android:layout_marginLeft="5dip"
+                        android:checked="true"
+                        android:button="@drawable/radio_btn_click"/>
+                </RadioGroup>
+            </LinearLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dip"
+                android:background="@drawable/normal_btn_click"
+                android:layout_gravity="center"
+                android:text="@string/complete_order"
+                android:onClick="PhoneSolveBtnClick" />
+        </LinearLayout>
+    </ScrollView>
+
+    <include
+        android:layout_weight="1"
+        layout="@layout/order_bottom_bar" />
+
+</LinearLayout>

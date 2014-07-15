@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cost_list>
+    <cost>
+        <id>1</id>
+        <name>维护长途路费</name>
+    </cost>
+     <cost>
+        <id>2</id>
+        <name>维护郊区路费</name>
+    </cost>
+     <cost>
+        <id>7</id>
+        <name>维护住宿费</name>
+    </cost>
+     <cost>
+        <id>8</id>
+        <name>下县餐饮补助</name>
+    </cost>
+     <cost>
+        <id>27</id>
+        <name>售后上门奖励</name>
+    </cost>
+</cost_list>

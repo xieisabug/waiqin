@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+     >
+
+    <include layout="@layout/top_bar"/>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:id="@+id/Container"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@drawable/content_panel_bg" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/homeBtnClick"
+                style="@style/home.menu"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/home_btn_click"
+                android:gravity="bottom|center_horizontal"
+                android:onClick="HomeBtnClick"
+                android:text="@string/home" />
+
+            <Button
+                android:id="@+id/orderManageBtnClick"
+                style="@style/home.menu"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/order_manage_btn_click"
+                android:gravity="bottom|center_horizontal"
+                android:onClick="OrderManageBtnClick"
+                android:text="@string/order_manage" />
+
+            <Button
+                android:id="@+id/noticeBtnClick"
+                style="@style/home.menu"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/notice_btn_click"
+                android:gravity="bottom|center_horizontal"
+                android:onClick="NoticeBtnClick"
+                android:text="@string/notice" />
+
+            <Button
+                android:id="@+id/moreBtnClick"
+                style="@style/home.menu"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/more_btn_click"
+                android:gravity="bottom|center_horizontal"
+                android:onClick="MoreBtnClick"
+                android:text="@string/more" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

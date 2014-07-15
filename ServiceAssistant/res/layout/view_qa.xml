@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/basic_infor_bg" >
+
+        <TextView
+            style="@style/order_detail.baseinfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dip"
+            android:text="@string/q_and_a" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="5dip"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/order_detail.content_title"
+            android:layout_width="80dip"
+            android:layout_height="wrap_content"
+            android:text="@string/q_type" />
+
+        <TextView
+            android:id="@+id/q_type_value"
+            style="@style/order_detail.content_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="5dip"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/order_detail.content_title"
+            android:layout_width="80dip"
+            android:layout_height="wrap_content"
+            android:text="@string/q_category" />
+
+        <TextView
+            android:id="@+id/q_category_value"
+            style="@style/order_detail.content_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="5dip"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/order_detail.content_title"
+            android:layout_width="80dip"
+            android:layout_height="wrap_content"
+            android:text="@string/question_describe" />
+
+        <TextView
+            android:id="@+id/question_describe_value"
+            style="@style/order_detail.content_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/question_describe" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="5dip"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/order_detail.content_title"
+            android:layout_width="80dip"
+            android:layout_height="wrap_content"
+            android:text="@string/question_solve" />
+
+        <TextView
+            android:id="@+id/question_solve_value"
+            style="@style/order_detail.content_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/question_solve" />
+    </LinearLayout>
+
+</LinearLayout>

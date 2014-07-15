@@ -1,0 +1,285 @@
+<resources>
+
+    <string name="app_name">外勤管理</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">设置</string>
+    <string name="title_activity_main">MainActivity</string>
+    <!-- 	<string name="request_url">http://222.240.218.91:20000/fieldwork</string>-->
+    <!-- 	<string name="request_url">http://192.168.2.100:20000/fieldwork</string>-->
+    <string name="request_url">http://222.240.218.90:20000/fieldwork</string>
+    <!-- MQTT服务器地址 -->
+    <string name="server_ip_address">222.240.218.90</string>
+    <string name="upload_socket_address">222.240.218.90</string>
+    <string name="update_version_address">http://222.240.218.90:20000</string>
+    <string name="upload_socket_port">10000</string>
+    <string name="mqtt_host">222.240.218.90</string>
+
+    <string name="office_phone">4008877660</string>
+
+    <string name="welcome">欢迎登录！</string>
+    <string name="username">用户名帐号</string>
+    <string name="pwd">密码</string>
+    <string name="please_input_num">请输入密码</string>
+    <string name="remember_pwd">记住密码</string>
+    <string name="forget_pwd">忘记密码?</string>
+    <string name="login">登录</string>
+
+    <string name="my_order">我的工单</string>
+    <string name="home_order_content0">您有5条紧急工单</string>
+    <string name="home_order_content1">您有15条普通新工单</string>
+    <string name="home_order_content2">您有1条未完成的工单</string>
+    <string name="home_order_content3">您已经完成152条工单</string>
+    <string name="home_order_content4">您已经有52条回访工单</string>
+    <string name="home_order_content5">您已经有22条维护工单</string>
+    <string name="notice">公告通知</string>
+    <string name="notice_title1">关于国庆节放假的通知</string>
+    <string name="notice_time1">2012年9月05号</string>
+    <string name="notice_title2">关于元旦放假的通知</string>
+    <string name="notice_time2">2012年12月05号</string>
+    <string name="find_more">查看更多</string>
+
+    <string name="home">主页</string>
+    <string name="order_manage">工单管理</string>
+    <string name="more">更多</string>
+
+    <string name="about_user_info">帐号信息</string>
+    <string name="user_info">用户信息</string>
+    <string name="meid">手机MEID</string>
+    <string name="version_info">版本信息</string>
+
+    <string name="old_pwd">原密码</string>
+    <string name="affirm_pwd">确认密码</string>
+    <string name="confirm_change">确认修改</string>
+
+    <string name="current_state">当前状态:</string>
+    <string name="base_info">基本信息</string>
+
+    <string name="menu_map">查看地图</string>
+    <string name="menu_contact_customer">联系客户</string>
+    <string name="menu_contact_bg">联系后台</string>
+
+    <string name="order_id">派工单ID:</string>
+    <string name="order_service_time">派工日期:</string>
+    <string name="order_send_type">派工类别:</string>
+    <string name="order_customer_name">公司名称:</string>
+    <string name="order_customer_address">上门地址:</string>
+    <string name="order_contact_name">联系人:</string>
+    <string name="order_customer_phone">客户电话:</string>
+    <string name="order_customer_mobile">客户手机:</string>
+    <string name="order_remark">派工说明:</string>
+    <string name="order_contact_tax_num">税号:</string>
+    <string name="order_tax_department">税务分局:</string>
+    <string name="order_service_arrive_time">预计时间:</string>
+    <string name="order_is_charge">是否收费:</string>
+    <string name="order_charge_money">收费金额:</string>
+    <string name="order_urgency_state">紧急程度:</string>
+    <string name="order_service_people_name">服务人员姓名:</string>
+    <string name="order_customer_city">客户所在城市:</string>
+    <string name="order_customer_department">所属部门名称:</string>
+    <string name="order_customer_district">客户所在区、县:</string>
+
+    <!-- 回执单基本信息 -->
+    <string name="receipt_base_top_title">完成回单基本信息</string>
+    <string name="receipt_base_customer_name">顾客名称:</string>
+    <string name="receipt_base_customer_tax">税号:</string>
+    <string name="receipt_base_tax_officer">税务分局:</string>
+    <string name="receipt_base_service_address">上门地址:</string>
+    <string name="receipt_base_contact_name">联系人:</string>
+    <string name="receipt_base_customer_tel">固定电话:</string>
+    <string name="receipt_base_customer_mobile">移动电话:</string>
+    <string name="receipt_base_service_time">到达时间:</string>
+    <string name="receipt_base_number">单据号:</string>
+    <string name="receipt_base_customer_sign">客户签名:</string>
+    <string name="receipt_base_customer_charge">费用过程:</string>
+    <string name="receipt_base_customer_remark">备注:</string>
+    <string name="receipt_base_customer_satisfied1">您对我公司服务的总体评价是:</string>
+    <string name="receipt_base_customer_satisfied2">您对我公司产品的总体评价是:</string>
+    <string name="receipt_base_customer_solve">服务方式:</string>
+    <string name="receipt_base_software_type">硬件型号及编号:</string>
+    <string name="receipt_base_software_version">软件版本号:</string>
+    <string name="receipt_base_software_env">使用环境:</string>
+    <string name="receipt_base_tec_name">技术工程师姓名:</string>
+    <string name="receipt_fee">费用报销单</string>
+    <string name="answer_question">解答问题</string>
+    <string name="receipt_type">回访类型</string>
+    <string name="product_case">产品运行情况</string>
+    <string name="dispose_result">处理结果</string>
+    <string name="satisfied1">很满意</string>
+    <string name="satisfied2">满意</string>
+    <string name="satisfied3">不满意</string>
+    <string name="is_upload_base_info">是否上传修改的客户基本信息:</string>
+    <string name="q_type">问题类型</string>
+    <string name="q_category">问题类别</string>
+    <string name="answer_the_question">解答:</string>
+    <string name="receipt_information">回访信息</string>
+    <string name="order_optimal_path">最优路径推荐</string>
+    <string name="service_product">服务产品</string>
+    <string name="q_and_a">问题及解答</string>
+    <string name="pop_call_dispose_btn">电话解决</string>
+    <string name="pop_arrive_target_btn">到达现场</string>
+    <string name="pop_change_order_btn">改派工单</string>
+    <string name="pop_radio_btn">录音</string>
+    <string name="picture">图片</string>
+    <string name="pop_photo_btn">拍照</string>
+    <string name="accept_order">接受工单</string>
+    <string name="check_question">查看问题</string>
+    <string name="service_help">航天信息全国服务监督电话:\n400-810-6116</string>
+    <string name="question_describe">问题描述</string>
+    <string name="solve_method">解决方法</string>
+    <string name="is_reorder">是否需要重新派工单</string>
+    <string name="complete_order">完成工单</string>
+
+    <string name="order_change_course">改派原因</string>
+    <string name="customer_require">客户要求</string>
+    <string name="recommend_engineer">推荐工程师</string>
+    <string name="apply_change_order">申请改派</string>
+
+    <string name="paper">纸质单据</string>
+    <string name="is_solve">是否解决</string>
+    <string name="question_solve">问题解答</string>
+    <string name="software_version">软件版本号</string>
+    <string name="customer_sign">客户签字</string>
+    <string name="back_remark">备注</string>
+    <string name="arraive_time">到达时间</string>
+    <string name="complish_time">完成时间</string>
+    <string name="service_time">服务日期</string>
+    <string name="photo">照片</string>
+    <string name="audio">录音</string>
+    <string name="start">开始</string>
+    <string name="stop">停止</string>
+
+    <string name="yes">是</string>
+    <string name="no">否</string>
+
+    <string name="change_order_reason">改派原因</string>
+    <string name="customer_demand">客户要求</string>
+    <string name="recommand_engineer">推荐工程师</string>
+
+    <string name="order_customer_chg">工单内容客户地址</string>
+    <string name="gps_customer_address">GPS定位客户地址</string>
+    <string name="input_address">手动输入客户地址</string>
+
+    <string name="add_action">提交</string>
+    <string name="cancel">取消</string>
+
+    <string name="str_id_start">开始</string>
+    <string name="str_id_bus">公交车</string>
+
+    <string name="order_state_new">新工单</string>
+    <string name="order_state_accept">接受任务</string>
+    <string name="order_state_change">申请改派中</string>
+    <string name="order_state_change_accept">申请改派通过</string>
+    <string name="order_state_change_refuse">申请改派未通过</string>
+    <string name="order_state_order_state">电话解决</string>
+    <string name="order_complish">工单完成</string>
+
+    <string name="phone_solve_back_paper">电话解决完成回执单</string>
+    <string name="spot_solve_back_paper">现场解决完成回执单</string>
+    <string name="tips">温馨提示</string>
+    <string name="make_sure">确认</string>
+
+    <string name="continues">继续</string>
+    <string name="back">返回</string>
+
+    <string name="find_pwd">忘记密码请联系管理员（0731-1234567）重置密码</string>
+    <string name="solve_tips">若选择到达现场解决，将无法使用电话解决和改派工单，请确认是否已经到达现场，若已到达现场请选择“继续”，否则“返回。”</string>
+    <string name="address_tips">请检查你当前位置与工单信息中的位置是否一致？”</string>
+
+    <string name="changsha">长沙市</string>
+    <string name="bus_path">110</string>
+    <string name="offline_login">离线登录</string>
+    <string name="player">播放</string>
+
+    <string name="spot_finish">现场解决已完成</string>
+    <string name="phone_finish">电话解决已完成</string>
+    <string name="change_finish">改派已完成</string>
+    <string name="visit_finish">回访工单已完成</string>
+
+    <string name="loadmore">加载更多...</string>
+    <string name="upload_more">上传全部</string>
+    <string name="order_dispose_process">工单处理过程详细信息</string>
+    <string name="setting">设置</string>
+    <string name="setting_order_remind">提醒时间间隔设置</string>
+    <string name="record_tips">录音提醒</string>
+    <string name="order_complete_panel">当前状态:现场解决完成回执单</string>
+    <string name="phone_complete_panel">当前状态:电话解决完成回执单</string>
+    <string name="phone_conplete_btn1">电话解决回执单基本信息</string>
+
+    <string name="conplete_panel_btn1">回执单基本信息和费用报销</string>
+    <string name="conplete_panel_btn2">问题解答</string>
+    <string name="conplete_panel_btn3">拍照/录音</string>
+    <string name="conplete_panel_btn4">完成工单</string>
+    <string name="conplete_panel_btn5">打印预览</string>
+
+    <!--BTPrinterActivity-->
+    <string name="send">发送</string>
+    <string name="Print">打印</string>
+    <string name="Clear">清空</string>
+    <string name="not_connected">请先连接蓝牙打印机（菜单->连接）</string>
+    <string name="bt_not_enabled_leaving">蓝牙没有启动，退出程序</string>
+    <string name="title_connecting">正在连接…</string>
+    <string name="title_connected_to">已连接:</string>
+    <string name="title_not_connected">没有连接</string>
+    <string name="default_font_gray_scale">4</string>
+    <string name="fontGrayscaleName">打印灰度</string>
+    <string name="fontGrayScaleRange">(1~8)</string>
+
+    <!--  DeviceListActivity -->
+    <string name="scanning">扫描设备…</string>
+    <string name="select_device">选择连接的设备</string>
+    <string name="none_paired">没有匹配的设备</string>
+    <string name="none_found">没有找到设备</string>
+    <string name="title_paired_devices">匹配的设备</string>
+    <string name="title_other_devices">其它可用设备</string>
+    <string name="button_scan">扫描设备</string>
+
+    <!-- Options Menu -->
+    <string name="connect">连接</string>
+    <string name="disconnect">断开</string>
+
+    <!-- 录音机 -->
+    <string name="recording">"录音"</string>
+    <string name="recording_stopped">"录音停止"</string>
+    <string name="storage_is_full">"存储空间已满"</string>
+    <string name="max_length_reached">"已达到长度上限"</string>
+    <string name="insert_sd_card">"需要SD卡才可使用"</string>
+    <string name="button_ok">"确定"</string>
+
+    <string name="audio_db_artist_name">"您的录音"</string>
+    <string name="audio_db_album_name">"录音"</string>
+    <string name="audio_db_playlist_name">"我的录音"</string>
+    <string name="error_sdcard_access">"无法访问存储器"</string>
+    <string name="error_app_internal">"内部应用程序错误"</string>
+    <string name="error_mediadb_new_record">"无法保存录制的音频"</string>
+
+    <string name="default_record_name">未命名录音</string>
+    <string name="menu_view_record_list">查看录音列表</string>
+    <string name="menu_setting">设置</string>
+    <string name="delete_dialog_title">您确定要删除这段录音吗？</string>
+    <string name="overwrite_dialog_title">%s已存在。\n确定要覆盖这段录音吗？</string>
+    <string name="preferences_title">设置</string>
+    <string name="pref_title_record_type">录音文件类型</string>
+    <string name="prefDialogTitle_recordType">请选择录音文件类型</string>
+    <string name="pref_title_enable_high_quality">使用高质量录音</string>
+    <string name="pref_summary_enable_high_quality">高质量录音会增大录音文件</string>
+    <string name="pref_title_enable_sound_effect">打开音效</string>
+    <string name="pref_summary_enable_sound_effect">操作录音机时播放音效</string>
+    <string name="notification_recording">正在录音...</string>
+    <string name="notification_stopped">录音已终止</string>
+    <string name="notification_warning">存储空间不足(小于%d分钟)</string>
+    <string name="sd_card_not_available">SD卡不存在</string>
+    <string name="open_file_explorer">打开文件夹</string>
+    <string name="alert_message_delete_record">确认要删除所选的录音吗?</string>
+    <string name="prefDefault_recordType">audio/3gpp</string>
+    <string-array name="prefEntries_recordType">
+        <item>amr</item>
+        <item>3gpp</item>
+    </string-array>
+    <string-array translatable="false" name="prefValues_recordType">
+        <item>audio/amr</item>
+        <item>audio/3gpp</item>
+    </string-array>
+    <string name="timer_format">%02d</string>
+    <string name="audio_db_title_format">yyyy-MM-dd HH:mm:ss</string>
+
+</resources>

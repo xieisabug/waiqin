@@ -1,0 +1,668 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/panel_bg"
+    android:orientation="vertical" >
+
+    <include layout="@layout/order_top_bar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:scrollbarSize="3dip"
+        android:scrollbarThumbVertical="@drawable/scrollbar_vertical_thumb" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dip"
+                android:layout_marginLeft="15dip"
+                android:layout_marginRight="15dip"
+                android:layout_marginTop="10dip"
+                android:background="@drawable/shape"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/order_detail.state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dip"
+                    android:layout_marginTop="5dip"
+                    android:text="@string/current_state" />
+
+                <TextView
+                    android:id="@+id/current_state_value"
+                    style="@style/order_detail.state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dip"
+                    android:layout_marginTop="5dip" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/tool_bar_bg" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dip"
+                    android:text="@string/receipt_base_top_title"
+                    android:textColor="@color/black" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dip"
+                android:layout_marginRight="15dip"
+                android:layout_marginTop="10dip"
+                android:orientation="vertical" >
+
+                <!-- 客户名称 -->
+
+                <TextView
+                    style="@style/order_detail.baseinfo_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/receipt_base_customer_name" />
+
+                <EditText
+                    android:id="@+id/receipt_base_customer_name_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="false"
+                    android:background="@drawable/edit_text_state_bg" />
+
+                <!-- 税号 -->
+
+                <TextView
+                    style="@style/order_detail.baseinfo_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dip"
+                    android:text="@string/receipt_base_customer_tax" />
+
+                <EditText
+                    android:id="@+id/receipt_base_customer_tax_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="false" 
+                    android:background="@drawable/edit_text_state_bg" />
+
+                <!-- 税务分局 -->
+
+                <TextView
+                    style="@style/order_detail.baseinfo_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dip"
+                    android:text="@string/receipt_base_tax_officer" />
+
+                <EditText
+                    android:id="@+id/receipt_base_tax_officer_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="false"
+                    android:background="@drawable/edit_text_state_bg" />
+                <!-- 上门地址 -->
+
+                <TextView
+                    style="@style/order_detail.baseinfo_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dip"
+                    android:text="@string/receipt_base_service_address" />
+
+                <EditText
+                    android:id="@+id/receipt_base_service_address_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text_state_bg" />
+                <!-- 联系人 -->
+
+                <TextView
+                    style="@style/order_detail.baseinfo_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dip"
+                    android:text="@string/receipt_base_contact_name" />
+
+                <EditText
+                    android:id="@+id/receipt_base_contact_name_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text_state_bg" />
+
+                <!-- 客户电话 -->
+
+                <TextView
+                    style="@style/order_detail.baseinfo_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dip"
+                    android:text="@string/receipt_base_customer_tel" />
+
+                <EditText
+                    android:id="@+id/receipt_base_customer_tel_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text_state_bg" />
+
+                <!-- 客户手机 -->
+
+                <TextView
+                    style="@style/order_detail.baseinfo_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dip"
+                    android:text="@string/receipt_base_customer_mobile" />
+
+                <EditText
+                    android:id="@+id/receipt_base_customer_mobile_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text_state_bg" />
+
+                <!-- 到达时间 -->
+
+                <TextView
+                    style="@style/order_detail.baseinfo_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dip"
+                    android:text="@string/receipt_base_service_time" />
+
+                <EditText
+                    android:id="@+id/receipt_base_service_time_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="false"
+                    android:background="@drawable/edit_text_state_bg" />
+
+                <!-- 单据号 -->
+
+                <TextView
+                    style="@style/order_detail.baseinfo_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dip"
+                    android:editable="false"
+                    android:text="@string/receipt_base_number" />
+
+                <EditText
+                    android:id="@+id/receipt_base_number_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text_state_bg" />
+
+                <!-- 客户签名 -->
+
+                <TextView
+                    style="@style/order_detail.baseinfo_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dip"
+                    android:text="@string/receipt_base_customer_sign" />
+
+                <EditText
+                    android:id="@+id/receipt_base_customer_sign_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text_state_bg" />
+
+                <!-- 备注 -->
+
+                <TextView
+                    style="@style/order_detail.baseinfo_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dip"
+                    android:text="@string/receipt_base_customer_remark" />
+
+                <EditText
+                    android:id="@+id/receipt_base_customer_remark_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text_state_bg" />
+
+                <LinearLayout
+                    android:id="@+id/tec_name_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/order_detail.baseinfo_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dip"
+                        android:text="@string/receipt_base_tec_name" />
+
+                    <EditText
+                        android:id="@+id/receipt_base_tec_name_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:editable="false"
+                        android:background="@drawable/edit_text_state_bg" />
+                </LinearLayout>
+
+                <!-- 上门维护单Panel -->
+
+                <LinearLayout
+                    android:id="@+id/maintance_panel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <!-- 服务方式 -->
+
+                    <TextView
+                        style="@style/order_detail.baseinfo_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dip"
+                        android:text="@string/receipt_base_customer_solve" />
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <RadioButton
+                            android:id="@+id/serviceRadio1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="上门"
+                            android:checked="true"
+                            android:textColor="@color/black" />
+
+                        <RadioButton
+                            android:id="@+id/serviceRadio2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="用户送修"
+                            android:textColor="@color/black" />
+                    </RadioGroup>
+
+                    <!-- 是否收费 -->
+
+                    <TextView
+                        style="@style/order_detail.baseinfo_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dip"
+                        android:text="@string/order_is_charge" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <RadioGroup
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal" >
+
+                            <RadioButton
+                                android:id="@+id/feeRadio1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="否"
+                                android:textColor="@color/black" />
+
+                            <RadioButton
+                                android:id="@+id/feeRadio2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="2dip"
+                                android:text="是"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dip"
+                                android:text="金额"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+
+                            <EditText
+                                android:id="@+id/fee_value"
+                                android:layout_width="30dip"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edit_text_state_bg"
+                                android:inputType="numberDecimal" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="3dip"
+                                android:text="元"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+                        </RadioGroup>
+                    </LinearLayout>
+                    <!-- 软件型号及编号 -->
+
+                    <TextView
+                        style="@style/order_detail.baseinfo_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dip"
+                        android:text="@string/receipt_base_software_type" />
+
+                    <EditText
+                        android:id="@+id/receipt_base_software_type_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edit_text_state_bg" />
+
+                    <!-- 软件版本号 -->
+
+                    <TextView
+                        style="@style/order_detail.baseinfo_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dip"
+                        android:text="@string/receipt_base_software_version" />
+
+                    <EditText
+                        android:id="@+id/receipt_base_software_version_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edit_text_state_bg" />
+
+                    <!-- 使用环境 -->
+
+                    <TextView
+                        style="@style/order_detail.baseinfo_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dip"
+                        android:text="@string/receipt_base_software_env" />
+
+                    <EditText
+                        android:id="@+id/receipt_base_software_env_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edit_text_state_bg" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <CheckBox
+                        android:id="@+id/is_upload_base_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@drawable/checkbox_state_bg" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dip"
+                        android:text="@string/is_upload_base_info" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:background="@drawable/tool_bar_bg" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dip"
+                    android:text="@string/receipt_fee"
+                    android:textColor="@color/black" />
+            </RelativeLayout>
+
+            <!-- 费用过程 -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dip"
+                android:layout_marginRight="30dip"
+                android:text="@string/receipt_base_customer_charge"
+                android:textColor="@color/baidu_blue"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/receipt_base_customer_charge_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dip"
+                android:layout_marginRight="30dip"
+                android:layout_marginTop="3dip"
+                android:text="无"
+                android:background="@drawable/edit_text_state_bg" />
+
+            <LinearLayout
+                android:id="@+id/cost_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dip"
+                android:layout_marginRight="15dip"
+                android:layout_marginTop="10dip"
+                android:orientation="vertical" >
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/receipt_visit_order"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone" >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dip"
+                    android:background="@drawable/tool_bar_bg" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dip"
+                        android:text="@string/receipt_information"
+                        android:textColor="@color/black" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dip"
+                    android:layout_marginRight="15dip"
+                    android:text="@string/receipt_type"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <!--<EditText
+                    android:id="@+id/receipt_type_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dip"
+                    android:layout_marginRight="15dip"
+                    android:singleLine="false" />-->
+                <Spinner
+                        android:id="@+id/receipt_type_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginRight="15dip"
+                        >
+
+                </Spinner>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dip"
+                    android:layout_marginRight="15dip"
+                    android:text="@string/product_case"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/product_case_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dip"
+                    android:layout_marginRight="15dip"
+                    android:singleLine="false"
+                    android:text="开票系统运行正常" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dip"
+                    android:layout_marginRight="15dip"
+                    android:text="@string/dispose_result"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/dispose_result_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dip"
+                    android:layout_marginRight="15dip"
+                    android:singleLine="false"
+                    android:text="检测开票，备份数据" />
+
+                <!-- 您对我公司服务的总体评价是 -->
+
+                <TextView
+                    style="@style/order_detail.baseinfo_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dip"
+                    android:layout_marginLeft="10dip"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" 
+                    android:text="@string/receipt_base_customer_satisfied1" />
+
+                <RadioGroup
+                    android:id="@+id/receipt_base_customer_satisfied1_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dip"
+                    android:orientation="horizontal" >
+
+                    <RadioButton
+                        android:id="@+id/satisfied1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/satisfied1"
+                        android:checked="true"
+                        android:textColor="@color/black" />
+
+                    <RadioButton
+                        android:id="@+id/satisfied2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/satisfied2"
+                        android:textColor="@color/black" />
+
+                    <RadioButton
+                        android:id="@+id/satisfied3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/satisfied3"
+                        android:textColor="@color/black" />
+                </RadioGroup>
+
+                <!-- 您对我公司产品的总体评价是 -->
+
+                <TextView
+                    style="@style/order_detail.baseinfo_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dip"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="10dip"
+                    android:textSize="16sp" 
+                    android:text="@string/receipt_base_customer_satisfied2" />
+
+                <RadioGroup
+                    android:id="@+id/receipt_base_customer_satisfied2_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dip"
+                    android:orientation="horizontal" >
+
+                    <RadioButton
+                        android:id="@+id/satisfied21"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/satisfied1"
+                        android:checked="true"
+                        android:textColor="@color/black" />
+
+                    <RadioButton
+                        android:id="@+id/satisfied22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/satisfied2"
+                        android:textColor="@color/black" />
+
+                    <RadioButton
+                        android:id="@+id/satisfied23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/satisfied3"
+                        android:textColor="@color/black" />
+                </RadioGroup>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/service_help"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="10dip"  />
+            </LinearLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dip"
+                android:layout_marginRight="15dip"
+                android:layout_marginTop="20dip"
+                android:background="@drawable/normal_btn_click"
+                android:onClick="SaveBaseInfoBtnClick"
+                android:text="@string/make_sure" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dip"
+                android:layout_marginLeft="15dip"
+                android:layout_marginRight="15dip"
+                android:layout_marginTop="15dip"
+                android:background="@drawable/normal_btn_click"
+                android:onClick="BackBtnClick"
+                android:text="@string/back" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

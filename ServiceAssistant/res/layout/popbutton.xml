@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:background="@drawable/ring_up_btn">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:text="@string/pop_call_dispose_btn"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="27dip"
+            style="@style/pop_menu.content_title"/>
+    </RelativeLayout>
+
+     <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:background="@drawable/arrive_target_btn">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:text="@string/pop_arrive_target_btn"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="27dip"
+            style="@style/pop_menu.content_title"/>
+    </RelativeLayout>
+    
+      <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:background="@drawable/change_order">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:text="@string/pop_change_order_btn"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="27dip"
+            style="@style/pop_menu.content_title"/>
+    </RelativeLayout>
+</LinearLayout>
