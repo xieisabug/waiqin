@@ -1,0 +1,81 @@
+html{
+    background: #dddddd;
+    height: 100%;
+}
+body{
+    font-family: "微软雅黑";
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+}
+#center{
+    width: 1024px;
+    position: relative;
+    height: 100%;
+    min-height: 700px;
+    margin: 0 auto;
+    background: url(../../images/login_bg.png) no-repeat;
+}
+#loginForm{
+    position: absolute;
+    top:280px;
+    left: 250px;
+}
+#loginForm{
+	/*ie7*/
+	*margin-top:15px
+}
+ul li{
+    list-style: none
+}
+.inputBox{
+    width: 241px;
+    height: 31px;
+    border: 1px solid #dddddd;
+    line-height: 30px;
+}
+.inputBox:hover{
+    border:1px solid #009FCC;
+}
+.inputBox:focus{
+    border:1px solid #009FCC;
+    background: #F8F8F8
+}
+.inputCheck{
+    vertical-align: top;
+    border: 1px solid #dddddd;
+}
+.inputCheck:hover{
+    border:1px solid #009FCC;
+}
+.inputCheck:checked{
+    border:1px solid #009FCC;
+    color:#0088A8
+}
+#forgetPw{
+    margin-left:120px;
+    cursor: pointer;
+}
+#forgetPw:hover{
+    color:#009FCC
+}
+#submitBtn{
+    background: url(../../images/login_btn.png) no-repeat;
+    width: 104px;
+    height: 64px;
+    position: absolute;
+    left: 320px;
+    top:85px;
+    border: none;
+    cursor:pointer;
+}
+#footer{
+    text-align:center;
+    padding:3px;
+    position: absolute;
+    margin-top: 650px;
+    width: 100%;
+}
+.validatebox-invalid{
+    background-position: right center;
+}

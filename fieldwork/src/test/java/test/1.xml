@@ -1,0 +1,57 @@
+<Srv_Service_Order>
+   <service_head customerUpdatFlag="2" orderTyp="0">
+      <workCard_id>515529</workCard_id>
+      <service_date>2013-08-31 11:16:32</service_date>
+      <order_code>WH20130805106</order_code>
+      <customer_addr>长沙市五一大道800号恒隆国际大厦22楼 </customer_addr>
+      <longitude>112.9883</longitude>
+      <latitude>28.20409</latitude>
+      <link_person>孙旋</link_person>
+      <customer_telphone>01088508868</customer_telphone>
+      <customer_mobile>qq</customer_mobile>
+      <arrive_date>2013-08-31 11:15:43</arrive_date>
+      <service_end_date>2013-08-31 11:18:58</service_end_date>
+      <customer_signature>qq</customer_signature>
+      <spending_process>无</spending_process>
+      <flag>1</flag>
+      <notes></notes>
+      <hardwareCode>qq</hardwareCode>
+      <softwareVersion>qq</softwareVersion>
+      <environment>qq</environment>
+   </service_head>
+   <question_body>
+      <problem>
+         <question_id>539524</question_id>
+         <productId>1539</productId>
+         <question_typ_id>81</question_typ_id>
+         <question_typ_p_id>52</question_typ_p_id>
+         <question_desc>恢复网上认证（测试2）</question_desc>
+         <solution_method> qq</solution_method>
+      </problem>
+      <problem>
+         <question_id>539525</question_id>
+         <productId>1689</productId>
+         <question_typ_id>98</question_typ_id>
+         <question_typ_p_id>58</question_typ_p_id>
+         <question_desc>恢复网上认证（测试）</question_desc>
+         <solution_method> qq</solution_method>
+      </problem>
+   </question_body>
+   <spending_info_body>
+      <spending_info>
+         <spending_item_id>3</spending_item_id>
+         <spending_name>基本补助</spending_name>
+         <spending>6.0</spending>
+      </spending_info>
+      <spending_info>
+         <spending_item_id>1</spending_item_id>
+         <spending_name>维护长途路费</spending_name>
+         <spending>10.0</spending>
+      </spending_info>
+      <spending_info>
+         <spending_item_id>7</spending_item_id>
+         <spending_name>维护住宿费</spending_name>
+         <spending>10.0</spending>
+      </spending_info>
+   </spending_info_body>
+</Srv_Service_Order>

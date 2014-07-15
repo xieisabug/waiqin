@@ -1,0 +1,28 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hn.join.fieldwork.persistence.CheckinDayMapper">
+	
+	<resultMap type="hn.join.fieldwork.domain.CheckinDay" id="checkinDayMap">
+		<id column="checkin_day_id" property="id" jdbcType="INTEGER" />
+		<result column="checkin_day_date" property="date" jdbcType="VARCHAR"/>
+		<result column="checkin_day_time" property="time" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<insert id="insertCheckinDay" parameterType="hn.join.fieldwork.domain.CheckinDay">
+		<selectKey resultType="java.lang.Integer" keyProperty="id"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into tbl_checkin_day(checkin_day_date,checkin_day_time) values(#{date,jdbcType=VARCHAR},#{time,jdbcType=VARCHAR})
+	</insert>
+	
+	
+	<select id="findByDate" resultMap="checkinDayMap">
+		select checkin_day_id,checkin_day_date,checkin_day_time from tbl_checkin_day
+	where checkin_day_date=#{date,jdbcType=VARCHAR}
+	</select>
+
+
+
+</mapper>

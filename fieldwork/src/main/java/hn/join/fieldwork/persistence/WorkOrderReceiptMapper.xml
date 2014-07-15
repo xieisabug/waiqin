@@ -1,0 +1,66 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hn.join.fieldwork.persistence.WorkOrderReceiptMapper">
+
+	<resultMap type="hn.join.fieldwork.domain.WorkOrderReceipt"	id="workOrderReceiptMap">
+		<id column="receipt_id" property="id" jdbcType="INTEGER" />
+		<result column="work_order_no" property="workOrderNo" jdbcType="VARCHAR" />
+		<result column="customer_updat_flag" property="customerUpdatFlag" jdbcType="VARCHAR" />
+		<result column="service_date" property="serviceDate" jdbcType="TIMESTAMP" />
+		<result column="order_code" property="orderCode" jdbcType="VARCHAR" />
+		<result column="customer_addr" property="customerAddr" jdbcType="VARCHAR" />
+		<result column="latitude" property="latitude" jdbcType="VARCHAR" />
+		<result column="longitude" property="longitude"	jdbcType="VARCHAR" />
+		<result column="link_person" property="linkPerson" jdbcType="VARCHAR" />
+		<result column="customer_telphone" property="customerTelphone" jdbcType="VARCHAR" />
+		<result column="customer_mobile" property="customerMobile" jdbcType="VARCHAR" />
+		<result column="arrive_date" property="arriveDate" jdbcType="TIMESTAMP" />
+		<result column="service_end_date" property="serviceEndDate" jdbcType="TIMESTAMP" />
+		<result column="customer_signature" property="customerSignature" jdbcType="VARCHAR" />
+		<result column="customer_if_satisfied_product" property="customerIfSatisfied_product" jdbcType="VARCHAR" />
+		<result column="customer_if_satisfied_service" property="customerIfSatisfied_service" jdbcType="VARCHAR" />
+		<result column="spending_process" property="spendingProcess" jdbcType="VARCHAR" />
+		<result column="flag" property="flag" jdbcType="VARCHAR" />
+		<result column="notes" property="notes" jdbcType="VARCHAR" />
+		<result column="visit_type" property="visitType" jdbcType="VARCHAR" />
+		<result column="product_status" property="productStatus" jdbcType="VARCHAR" />
+		<result column="handle_result" property="handleResult" jdbcType="VARCHAR" />
+		<result column="hardware_code" property="hardwareCode" jdbcType="VARCHAR" />
+		<result column="software_version" property="softwareVersion" jdbcType="VARCHAR" />
+		<result column="environment" property="environment" jdbcType="VARCHAR" />
+		
+		<result column="is_charge" property="isCharge" jdbcType="VARCHAR" />
+		<result column="is_charge_value" property="isChargeValue" jdbcType="VARCHAR" />
+		
+		<collection property="problems" column="work_order_no" select="hn.join.fieldwork.persistence.WorkOrderProblemMapper.getByWorkOrderNo" />
+	</resultMap>
+
+	<sql id="base_column_list">
+		receipt_id,customer_updat_flag,work_order_no,service_date,order_code,customer_addr,latitude,longitude,link_person,customer_telphone,customer_mobile,arrive_date,service_end_date,customer_signature,customer_if_satisfied_product,customer_if_satisfied_service,spending_process,flag,notes,visit_type,product_status,handle_result,hardware_code,software_version,environment
+	</sql>
+
+
+	<select id="getByWorkOrderNo" resultMap="workOrderReceiptMap"	parameterType="java.lang.String">
+		select <include refid="base_column_list" /> from tbl_work_order_receipt where work_order_no=#{workOrderNo}
+	</select>
+
+	<insert id="insertWorkOrderReceipt" parameterType="hn.join.fieldwork.domain.WorkOrderReceipt">
+		<selectKey resultType="java.lang.Integer" keyProperty="id"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into
+			tbl_work_order_receipt(customer_updat_flag,work_order_no,service_date,order_code,customer_addr,latitude,longitude,link_person,customer_telphone,customer_mobile,arrive_date,service_end_date,customer_signature,customer_if_satisfied_product,customer_if_satisfied_service,spending_process,flag,notes,visit_type,product_status,handle_result,hardware_code,software_version,environment,is_charge,is_charge_value)
+		values
+			(#{customerUpdatFlag,jdbcType=VARCHAR},#{workOrderNo,jdbcType=VARCHAR},#{serviceDate,jdbcType=TIMESTAMP},#{orderCode,jdbcType=VARCHAR},#{customerAddr,jdbcType=VARCHAR},#{latitude,jdbcType=VARCHAR},#{longitude,jdbcType=VARCHAR},#{linkPerson,jdbcType=VARCHAR},#{customerTelphone,jdbcType=VARCHAR},#{customerMobile,jdbcType=VARCHAR},#{arriveDate,jdbcType=TIMESTAMP},#{serviceEndDate,jdbcType=TIMESTAMP},#{customerSignature,jdbcType=VARCHAR},#{customerIfSatisfied_product,jdbcType=VARCHAR},#{customerIfSatisfied_service,jdbcType=VARCHAR},#{spendingProcess,jdbcType=VARCHAR},#{flag,jdbcType=VARCHAR},#{notes,jdbcType=VARCHAR},#{visitType,jdbcType=VARCHAR},#{productStatus,jdbcType=VARCHAR},#{handleResult,jdbcType=VARCHAR},#{hardwareCode,jdbcType=VARCHAR},#{softwareVersion,jdbcType=VARCHAR},#{environment,jdbcType=VARCHAR},#{isCharge,jdbcType=VARCHAR},#{isChargeValue,jdbcType=VARCHAR})
+	</insert>
+	
+	<select id="countByWorkOrderNo" resultType="java.lang.Integer" parameterType="java.lang.String">
+		select count(work_order_no) from tbl_work_order_receipt	where work_order_no=#{workOrderNo}
+	</select>
+
+
+
+
+</mapper>

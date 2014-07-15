@@ -1,0 +1,62 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hn.join.fieldwork.persistence.RevenueMapper">
+
+
+	<resultMap type="hn.join.fieldwork.domain.Revenue" id="revenueMap">
+		<id column="revenue_id" property="id" jdbcType="INTEGER" />
+		<result column="revenue_code" property="revenueCode" jdbcType="VARCHAR" />
+		<result column="revenue_name" property="revenueName" jdbcType="VARCHAR"/>
+		<result column="city_code" property="cityCode" jdbcType="VARCHAR"/>
+	</resultMap>
+
+	<sql id="base_column_list">
+		revenue_id,revenue_code,revenue_name,city_code
+	</sql>
+
+	<select id="getById" resultMap="revenueMap" >
+		select <include refid="base_column_list"/> from tbl_revenue
+	where revenue_id=#{revenueId}
+	</select>
+	
+	<insert id="insertRevenue" parameterType="hn.join.fieldwork.domain.Revenue">
+		insert into tbl_revenue (revenue_id,revenue_code,revenue_name,city_code)
+	values(#{id,jdbcType=INTEGER},#{revenueCode,jdbcType=VARCHAR},#{revenueName,jdbcType=VARCHAR},#{cityCode,jdbcType=VARCHAR})
+	</insert>
+
+
+	<delete id="deleteRevenue" parameterType="java.lang.Integer">
+		delete from tbl_revenue where revenue_id=#{revenueId}
+	</delete>
+	
+	
+	<select id="countBy" parameterType="java.lang.String" resultType="java.lang.Long">
+		select count(revenue_id) from tbl_revenue 
+			<trim prefix="WHERE" prefixOverrides="AND |OR ">
+				<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(revenueName)">
+					revenue_name like #{revenueName}
+				</if>
+			</trim>
+	</select>
+	
+	
+	
+	<select id="findBy"  resultMap="revenueMap">
+		select <include refid="base_column_list"/> from tbl_revenue 
+			<trim prefix="WHERE" prefixOverrides="AND |OR ">
+				<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(revenueName)">
+					revenue_name like #{revenueName}
+				</if>
+			</trim>
+		order by revenue_id ASC
+		<if test="limit !=null">
+				LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+	
+	<select id="findAll" resultMap="revenueMap">
+		select <include refid="base_column_list"/> from tbl_revenue 
+	</select>
+
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:hz="http://www.hazelcast.com/schema/spring"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.hazelcast.com/schema/spring http://www.hazelcast.com/schema/spring/hazelcast-spring-2.3.xsd">
+
+
+
+	<hz:client id="client">
+		<hz:member>192.168.7.164:20000</hz:member>
+	</hz:client>
+
+
+	<hz:map id="latestFieldWorkerInfoMap" instance-ref="client"
+		name="latestFieldWorkerInfoMap" />
+
+	<hz:multiMap id="areaCode2FieldWorkerMap" instance-ref="client"
+		name="areaCode2FieldWorkerMap" />
+
+	<hz:lock id="fieldWorkerWriteLock" name="fieldWorkerWriteLock"
+		instance-ref="client" />
+	
+	<bean id="someBean" class="test.SomeBean">
+		<property name="fieldWorkerWriteLock" ref="fieldWorkerWriteLock" />
+	
+	</bean>
+		
+</beans>

@@ -1,0 +1,40 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hn.join.fieldwork.persistence.ProductMapper">
+	<resultMap type="hn.join.fieldwork.domain.Product" id="productMap">
+		<id column="product_id" property="id" jdbcType="INTEGER" />
+		<result column="product_name" property="name" jdbcType="VARCHAR" />
+	</resultMap>
+
+
+	<insert id="insertProduct" parameterType="hn.join.fieldwork.domain.Product">
+		insert into tbl_product(product_id,product_name)
+	values(#{id,jdbcType=INTEGER},#{name,jdbcType=VARCHAR})
+	</insert>
+	
+	
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		delete from tbl_product where product_id=#{productId}
+	</delete>
+	
+	
+	<select id="count"  resultType="java.lang.Long">
+		select count(product_id) from tbl_product
+	</select>
+	
+	
+	<select id="find"  resultMap="productMap">
+		select product_id,product_name from tbl_product
+		<if test="limit !=null">
+				LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+	
+	<select id="getById" resultMap="productMap" parameterType="java.lang.Integer">
+		select product_id,product_name from tbl_product where product_id=#{productId} 
+	</select>
+
+
+
+</mapper>

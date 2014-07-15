@@ -1,0 +1,81 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hn.join.fieldwork.persistence.NotificationMapper">
+
+	<resultMap type="hn.join.fieldwork.domain.Notification" id="notificationMap">
+		<id column="notification_id" property="id" jdbcType="INTEGER" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="content" property="content" jdbcType="VARCHAR" />
+		<result column="city" property="city" jdbcType="VARCHAR" />
+		<result column="publish_date" property="publishDate" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<sql id="base_column_list">
+		notification_id,title,content,city,publish_date,create_time
+	</sql>
+
+
+	<insert id="insertNotification" parameterType="hn.join.fieldwork.domain.Notification">
+		<selectKey resultType="java.lang.Integer" keyProperty="id"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into tbl_notification (title,content,publish_date,city,create_time)
+		values(#{title,jdbcType=VARCHAR},#{content,jdbcType=VARCHAR},#{publishDate,jdbcType=VARCHAR},#{city,jdbcType=VARCHAR},now())
+	</insert>
+	
+	<select id="getById" parameterType="java.lang.Integer" resultMap="notificationMap">
+		select <include refid="base_column_list"/> from tbl_notification
+	where notification_id=#{notificationId}
+	
+	</select>
+	
+	
+	<select id="countBy" resultType="java.lang.Long">
+		select count(notification_id) from tbl_notification 
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+				<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(title)">
+					title like concat('%',#{title},'%')
+				</if>
+				<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(content)">
+					AND content = #{content}
+				</if>
+				<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(city)">
+					AND city = #{city}
+				</if>
+				<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(publishDate)">
+					AND publish_date = #{publishDate}
+				</if>
+		</trim>
+	</select>
+	
+	<select id="findBy" resultMap="notificationMap">
+		select <include refid="base_column_list"/> from tbl_notification
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+				<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(title)">
+					title like concat('%',#{title},'%')
+				</if>
+				<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(content)">
+					AND content = #{content}
+				</if>
+				<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(city)">
+					AND city = #{city}
+				</if>
+				<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(publishDate)">
+					AND publish_date = #{publishDate}
+				</if>
+		</trim>
+		order by create_time desc
+		<if test="limit !=null">
+				LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+	
+	
+	
+	
+
+
+</mapper>

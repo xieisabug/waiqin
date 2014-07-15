@@ -1,0 +1,66 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hn.join.fieldwork.persistence.ProblemTypeMapper">
+
+	<resultMap type="hn.join.fieldwork.domain.ProblemType" id="problemTypeMap">
+		<id column="problem_type_id" property="id" jdbcType="INTEGER" />
+		<result column="problem_type_name" property="name" jdbcType="VARCHAR" />
+		<association property="category" column="problem_category_id"
+			resultMap="hn.join.fieldwork.persistence.ProblemCategoryMapper.problemCategoryMap" />
+	</resultMap>
+
+	<insert id="insertProblemType">
+		insert into tbl_problem_type(problem_type_id,problem_type_name,problem_category_id,create_time)
+	values(#{problemType.id,jdbcType=INTEGER},#{problemType.name,jdbcType=VARCHAR},#{problemCategoryId,jdbcType=INTEGER},now())
+	</insert>
+	
+	
+	<delete id="deleteProblemType" parameterType="java.lang.Integer">
+		delete from tbl_problem_type where problem_type_id=#{problemTypeId}
+	</delete>
+	
+	
+	<select id="countBy" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(problem_type_id) from tbl_problem_type
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+				<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(name)">
+					problem_type_name like #{name}
+				</if>
+		</trim>
+	</select>
+	
+	
+	<select id="findBy"  resultMap="problemTypeMap">
+		select tbl_problem_type.problem_type_id,tbl_problem_type.problem_type_name,tbl_problem_category.problem_category_id,tbl_problem_category.problem_category_name from tbl_problem_type INNER JOIN tbl_problem_category on tbl_problem_type.problem_category_id=tbl_problem_category.problem_category_id
+			<trim prefix="WHERE" prefixOverrides="AND |OR ">
+				<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(name)">
+					tbl_problem_type.problem_type_name like #{name}
+				</if>
+			</trim>
+		order by tbl_problem_type.problem_type_id ASC
+		<if test="limit !=null">
+				LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+	
+	
+	<resultMap type="java.util.HashMap" id="simeleMap">
+		<id column="problem_type_id" property="id" jdbcType="INTEGER"
+			javaType="Integer" />
+		<result column="problem_type_name" property="name" jdbcType="VARCHAR"
+			javaType="String" />
+		<result column="problem_category_id" property="problemCategoryId"
+			jdbcType="INTEGER" javaType="Integer" />
+	</resultMap>
+	
+	<select id="findAll" resultMap="simeleMap">
+		select
+		problem_type_id,problem_type_name,problem_category_id
+		from tbl_problem_type
+	
+	</select>
+	
+
+
+</mapper>

@@ -1,0 +1,173 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hn.join.fieldwork.persistence.DeviceMapper">
+
+	<resultMap type="hn.join.fieldwork.domain.Device" id="deviceMap">
+		<id column="device_id" property="id" jdbcType="BIGINT" />
+		<result column="phone_no" property="phoneNo" jdbcType="VARCHAR" />
+		<result column="meid" property="meid" jdbcType="VARCHAR" />
+		<result column="model" property="model" jdbcType="VARCHAR" />
+		<result column="current_amount" property="currentAmount"
+			jdbcType="FLOAT" />
+		<result column="consume_category" property="consumeCategory"
+			jdbcType="VARCHAR" />
+		<result column="area_code" property="areaCode" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="visible_status" property="visibleStatus" jdbcType="VARCHAR" />
+		<collection property="journals" column="device_id"
+			select="findJournalByDeviceId" />
+	</resultMap>
+
+	<sql id="device_column_list">
+		device_id,phone_no,meid,model,current_amount,consume_category,status,area_code,create_time,visible_status
+	</sql>
+
+	<sql id="device_journal_column_list">
+		device_journal_id,memo,create_time,previous_state,operator_id
+	</sql>
+
+
+	<resultMap type="hn.join.fieldwork.domain.DeviceJournal" id="deviceJournalMap">
+		<id column="device_journal_id" property="id" jdbcType="BIGINT" />
+		<result column="memo" property="memo" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="previous_state" property="previousState"
+			jdbcType="VARCHAR" />
+		<association property="operator" column="operator_id"
+			select="hn.join.fieldwork.persistence.UserMapper.getById" />
+	</resultMap>
+
+
+	<select id="getById" parameterType="java.lang.Long" resultMap="deviceMap">
+		select
+		<include refid="device_column_list" />
+		from tbl_device
+		where device_id=#{deviceId}
+	</select>
+
+
+	<select id="findJournalByDeviceId" parameterType="java.lang.Long"
+		resultMap="deviceJournalMap">
+		select
+		<include refid="device_journal_column_list" />
+		from tbl_device_journal
+		where device_id=#{deviceId}
+	</select>
+
+	<insert id="insertDevice" parameterType="hn.join.fieldwork.domain.Device">
+		<selectKey resultType="java.lang.Long" keyProperty="id"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into
+		tbl_device(phone_no,meid,model,current_amount,consume_category,status,area_code,create_time,visible_status)
+		values(#{phoneNo,jdbcType=VARCHAR},#{meid,jdbcType=VARCHAR},#{model,jdbcType=VARCHAR},#{currentAmount,jdbcType=FLOAT},#{consumeCategory,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{areaCode,jdbcType=VARCHAR},now(),#{visibleStatus,jdbcType=VARCHAR})
+	</insert>
+	
+	
+	<update id="updateDevice" parameterType="hn.join.fieldwork.domain.Device">
+		update tbl_device set phone_no=#{phoneNo,jdbcType=VARCHAR},
+		meid=#{meid,jdbcType=VARCHAR},
+		model=#{model,jdbcType=VARCHAR},
+		current_amount=#{currentAmount,jdbcType=FLOAT},
+		consume_category=#{consumeCategory,jdbcType=VARCHAR},
+		status=#{status,jdbcType=VARCHAR},
+		area_code=#{areaCode,jdbcType=VARCHAR}
+		where device_id=#{id,jdbcType=BIGINT}
+	
+	</update>
+	
+	<insert id="insertDeviceJournal">
+		insert into tbl_device_journal(memo,create_time,previous_state,device_id,operator_id)
+		values(#{journal.memo,jdbcType=VARCHAR},now(),#{journal.previousState,jdbcType=VARCHAR},#{deviceId,jdbcType=BIGINT},#{operatorId,jdbcType=BIGINT})
+	</insert>
+	
+	<update id="deleteDevice" parameterType="java.lang.Long">
+		update tbl_device set visible_status='invisible'
+	where device_id=#{deviceId,jdbcType=BIGINT}
+	</update>
+	
+	<select id="countBy" resultType="java.lang.Long">
+		select count(device_id) from tbl_device
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(areaCode)">
+				area_code = #{areaCode}
+			</if>
+			<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(meid)">
+				AND meid like #{meid}
+			</if>
+			<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(phoneNo)">
+				AND phone_no like #{phoneNo}
+			</if>
+		</trim>
+	</select>
+	
+	<select id="findBy" resultMap="deviceMap">
+		select <include refid="device_column_list"/> from tbl_device
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(areaCode)">
+				area_code = #{areaCode}
+			</if>
+			<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(meid)">
+				AND meid like #{meid}
+			</if>
+			<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(phoneNo)">
+				AND phone_no like #{phoneNo}
+			</if>
+		</trim>
+		order by create_time asc
+		<if test="limit !=null">
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+	
+	<select id="countByIdle" resultType="java.lang.Long">
+		select count(device_id)  from tbl_device
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			not exists (select 1 from tbl_fieldworker where my_device_id =device_id)
+			<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(areaCode)">
+				AND area_code = #{areaCode}
+			</if>
+			<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(meid)">
+				AND	meid like #{meid}
+			</if>
+			<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(phoneNo)">
+				AND phone_no like #{phoneNo}
+			</if>
+				And status='ACTIVE'
+		</trim>
+	
+	</select>
+	
+	
+	<select id="findByIdle" resultMap="deviceMap">
+		select <include refid="device_column_list"/> from tbl_device
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			not exists (select 1 from tbl_fieldworker where my_device_id =device_id)
+			<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(areaCode)">
+				area_code = #{areaCode}
+			</if>
+			<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(meid)">
+				AND	meid like #{meid}
+			</if>
+			<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(phoneNo)">
+				AND phone_no like #{phoneNo}
+			</if>
+				And status='ACTIVE'
+		</trim>
+		order by create_time asc
+		<if test="limit !=null">
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+	
+	
+	<select id="countByMeid" resultType="java.lang.Long" parameterType="java.lang.String">
+			select count(1) from tbl_device where meid=#{meid}
+	</select>
+
+
+
+</mapper>

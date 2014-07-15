@@ -1,0 +1,60 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hn.join.fieldwork.persistence.DepartmentMapper">
+
+
+	<resultMap type="hn.join.fieldwork.domain.Department" id="departmentMap">
+		<id column="department_id" property="id" jdbcType="INTEGER" />
+		<result column="department_code" property="departmentCode"
+			jdbcType="VARCHAR" />
+		<result column="department_name" property="departmentName"
+			jdbcType="VARCHAR" />
+		<result column="city" property="city" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<sql id="base_column_list">
+		department_id,department_code,department_name,city
+	</sql>
+	
+
+	<select id="getById" resultMap="departmentMap" parameterType="java.lang.Integer">
+		select <include refid="base_column_list"/> from tbl_department
+	where department_id=#{department_id}
+	</select>
+	
+	<insert id="insertDepartment" parameterType="hn.join.fieldwork.domain.Department">
+		insert into tbl_department (department_id,department_name,department_code,city)
+	values (#{id,jdbcType=INTEGER},#{departmentName,jdbcType=VARCHAR},#{departmentCode,jdbcType=VARCHAR},#{city,jdbcType=VARCHAR})
+	</insert>
+
+	<delete id="deleteDepartment" parameterType="java.lang.Integer">
+		delete from tbl_department where department_id =#{departmentId}
+	</delete>
+	
+	<select id="countBy" resultType="java.lang.Long" parameterType="java.lang.String">
+		select count(department_id) from tbl_department 
+			<trim prefix="WHERE" prefixOverrides="AND |OR ">
+				<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(departmentName)">
+					department_name like #{departmentName}
+				</if>
+			</trim>
+	</select>
+	
+	
+	
+	<select id="findBy"  resultMap="departmentMap">
+		select <include refid="base_column_list"/> from tbl_department
+			<trim prefix="WHERE" prefixOverrides="AND |OR ">
+				<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(departmentName)">
+					department_name like #{departmentName}
+				</if>
+			</trim>
+		order by department_id ASC
+		<if test="limit !=null">
+				LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+
+</mapper>

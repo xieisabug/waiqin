@@ -1,0 +1,53 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hn.join.fieldwork.persistence.SyncDataTransferObjectMapper">
+
+	<resultMap type="hn.join.fieldwork.domain.SyncDataTransferObject" id="dtoMap">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="dto_type"  property="dtoType" jdbcType="VARCHAR"/>
+		<result column="dto" property="dto" jdbcType="VARCHAR" />
+		<result column="result" property="result" jdbcType="INTEGER" />
+		<result column="sync_time" property="syncTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<sql id="base_column">
+		id,dto_type,dto,sync_time,result
+	</sql>
+	
+	<insert id="insertSyncDataTransferObject" parameterType="hn.join.fieldwork.domain.SyncDataTransferObject">
+		<selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into tbl_sync_dto(dto_type,dto,result,create_time,retry) values(#{dtoType,jdbcType=VARCHAR},#{dto,jdbcType=VARCHAR},0,now(),0)
+	</insert>
+	
+	<select id="findDataTransferObjectForSync" resultMap="dtoMap">
+		SELECT <include refid="base_column"/> FROM tbl_sync_dto 
+	WHERE result=0 and  ((sync_time is null) or (sync_time is not null and TIMESTAMPDIFF(MINUTE,sync_time,now())&gt;=5)) and retry &lt;3 order by create_time asc limit 500
+	</select>
+	
+	<update id="updateOnSync" parameterType="java.util.List">
+		update tbl_sync_dto set sync_time=now(),
+		retry=retry+1 
+		where id in (
+			<foreach collection="list" item="item" index="index" separator=",">
+				#{item}
+			</foreach>
+		)
+	</update>
+	
+	
+	<update id="updateOnSucc" parameterType="java.lang.Integer">
+		update tbl_sync_dto set result=1 where id=#{syncId} 
+	</update>
+	
+	<!-- 
+		删除超过 3天的成功同步的数据
+	 -->
+	<delete id="deleteStaleData">
+		delete from tbl_sync_dto where result=1 and TIMESTAMPDIFF(DAY,sync_time,now())&gt;=3
+	</delete>
+
+
+</mapper>

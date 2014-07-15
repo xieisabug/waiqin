@@ -1,0 +1,53 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hn.join.fieldwork.persistence.ProblemCategoryMapper">
+
+	<resultMap type="hn.join.fieldwork.domain.ProblemCategory"	id="problemCategoryMap">
+		<id column="problem_category_id" property="id" jdbcType="INTEGER" />
+		<result column="problem_category_name" property="name"	jdbcType="VARCHAR" />
+		<result column="product_id" property="productId" jdbcType="INTEGER" />
+		<result column="product_name" property="productName" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="insertProblemCategory" parameterType="hn.join.fieldwork.domain.ProblemCategory">
+		insert into tbl_problem_category(problem_category_id,problem_category_name,product_id,product_name,create_time)
+		values(#{id,jdbcType=INTEGER},#{name,jdbcType=VARCHAR},#{productId,jdbcType=INTEGER},#{productName,jdbcType=VARCHAR},now())
+	</insert>
+	
+	<delete id="deleteProblemCategory" parameterType="java.lang.Integer">
+		delete from tbl_problem_category where problem_category_id=#{id}
+	</delete>
+	
+	<select id="countBy" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(problem_category_id) from tbl_problem_category
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+				<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(name)">
+					problem_category_name like #{name}
+				</if>
+		</trim>
+	</select>
+	
+	
+	<select id="findBy"  resultMap="problemCategoryMap">
+		select problem_category_id,problem_category_name,product_id,product_name from tbl_problem_category
+			<trim prefix="WHERE" prefixOverrides="AND |OR ">
+				<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(name)">
+					problem_category_name like #{name}
+				</if>
+			</trim>
+		order by problem_category_id ASC
+		<if test="limit !=null">
+				LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+	
+	
+	<select id="findAll" resultMap="problemCategoryMap">
+		select problem_category_id,problem_category_name,product_id,product_name from tbl_problem_category
+	</select>
+	
+	
+
+
+</mapper>

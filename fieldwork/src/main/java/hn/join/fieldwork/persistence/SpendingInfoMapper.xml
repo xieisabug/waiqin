@@ -1,0 +1,37 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hn.join.fieldwork.persistence.SpendingInfoMapper">
+	
+	
+	<resultMap type="hn.join.fieldwork.domain.SpendingInfo" id="spendinginfoMap">
+		<id column="id" property="id" jdbcType="INTEGER"/>
+		<result column="work_order_no" property="workOrderNo" jdbcType="VARCHAR" />
+		<result column="spending_item_id" property="spendingItemId" jdbcType="INTEGER" />
+		<result column="spending_name" property="spendingName" jdbcType="VARCHAR" />
+		<result column="spending" property="spending" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	
+	<insert id="insertSpendingInfo" parameterType="hn.join.fieldwork.domain.SpendingInfo">
+		<selectKey resultType="java.lang.Integer" keyProperty="id"	order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into tbl_spending_info(spending_item_id ,spending_name,spending,work_order_no)
+		values(#{spendingItemId,jdbcType=INTEGER},#{spendingName,jdbcType=VARCHAR},#{spending,jdbcType=VARCHAR},#{workOrderNo,jdbcType=VARCHAR})
+	</insert>
+	
+	<insert id="insertSpendings" parameterType="java.util.List">
+		INSERT INTO	tbl_spending_info(spending_item_id ,spending_name,spending,work_order_no)	VALUES
+		<foreach collection="spendings" item="item" index="index" separator=",">
+			(#{item.spendingItemId,jdbcType=INTEGER},#{item.spendingName,jdbcType=VARCHAR},#{item.spending,jdbcType=VARCHAR},#{item.workOrderNo,jdbcType=VARCHAR})
+		</foreach>
+	</insert>
+	
+	
+	<select id="getByWorkOrderNo" parameterType="java.lang.String"	resultMap="spendinginfoMap">
+		select id,spending_item_id,spending_name,spending,work_order_no
+		from tbl_spending_info where work_order_no=#{workOrderNo}
+	</select>
+
+</mapper>

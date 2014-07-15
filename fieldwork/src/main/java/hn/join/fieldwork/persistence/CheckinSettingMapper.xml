@@ -1,0 +1,68 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hn.join.fieldwork.persistence.CheckinSettingMapper">
+	<resultMap type="hn.join.fieldwork.domain.CheckinSetting" id="checkinSettingMap">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="setting_date" property="settingDate" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<association property="creator" column="creator_id" select="hn.join.fieldwork.persistence.UserMapper.getById" />
+	</resultMap>
+	
+	
+	<select id="getByDate" resultMap="checkinSettingMap" parameterType="java.util.Date">
+		select id,setting_date,status,create_time,creator_id from tbl_checkin_setting
+			where setting_date=#{date}
+	</select>
+	
+	<insert id="insertCheckinSetting">
+		<selectKey resultType="java.lang.Long" keyProperty="id"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		replace into tbl_checkin_setting(setting_date,status,create_time,creator_id)
+	values(#{checkinSetting.settingDate,jdbcType=VARCHAR},#{checkinSetting.status,jdbcType=VARCHAR},now(),#{creatorId,jdbcType=BIGINT})
+	</insert>
+	
+	<select id="countBy" resultType="java.lang.Long">
+		select count(id) from tbl_checkin_setting
+			<trim prefix="WHERE" prefixOverrides="AND |OR ">
+				<if test="fromDate !=null">
+					setting_date &gt;= #{fromDate}
+				</if>
+				<if test="toDate !=null">
+					AND setting_date &lt;= #{toDate}
+				</if>
+			</trim>
+	</select>
+	
+	<select id="findBy" resultMap="checkinSettingMap">
+		
+			select id,setting_date,status,create_time,creator_id from tbl_checkin_setting
+			<trim prefix="WHERE" prefixOverrides="AND |OR ">
+				<if test="fromDate !=null">
+					setting_date &gt;= #{fromDate}
+				</if>
+				<if test="toDate !=null">
+					AND setting_date &lt;= #{toDate}
+				</if>
+			</trim>
+			order by setting_date asc
+			<if test="limit !=null">
+				LIMIT #{limit} OFFSET #{offset}
+			</if>
+	</select>
+	
+	
+	
+	
+	
+<!-- 	<update id="updateCheckinSetting">
+		update tbl_checkin_setting
+			set status=#{status,jdbcType=VARCHAR}
+		where setting_data=#{date}
+	</update> -->
+	
+
+</mapper>

@@ -1,0 +1,71 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hn.join.fieldwork.persistence.RoleMapper">
+	
+	<resultMap id="roleMap" type="hn.join.fieldwork.domain.Role">
+		<id column="role_id" property="id" jdbcType="INTEGER" />
+		<result column="role_name" property="roleName" jdbcType="VARCHAR"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="permissions" property="permissions" jdbcType="VARCHAR" typeHandler="hn.join.fieldwork.persistence.PermissionStringTypeHandler" />
+	</resultMap>
+	
+	<sql id="base_column_list">
+		role_id,role_name,create_time,permissions
+	</sql>
+	
+	
+	<select id="getById" resultMap="roleMap" parameterType="java.lang.Integer">
+		select <include refid="base_column_list"/> from tbl_role where role_id=#{roleId}
+	</select>
+	
+	<select id="countByRoleName" parameterType="java.lang.String" resultType="java.lang.Long">
+		select count(role_id) from tbl_role
+		where role_id !=1 
+			<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(roleName)">	
+		 		and role_name like CONCAT('%', #{roleName}, '%')
+		 	</if>
+	</select>
+	
+	<select id="findByRoleName" resultMap="roleMap">
+		select <include refid="base_column_list"/> from tbl_role
+		where role_id !=1 
+			<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(roleName)">	
+		 		and role_name like CONCAT('%', #{roleName}, '%')
+		 	</if>
+		order by role_id asc 
+		<if test="limit !=null">
+				LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+	
+	
+	
+	<insert id="insertRole" parameterType="hn.join.fieldwork.domain.Role">
+		<selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+		insert into tbl_role(role_name,create_time,permissions)
+		values (#{roleName,jdbcType=VARCHAR},now(),#{permissions,jdbcType=VARCHAR,typeHandler=hn.join.fieldwork.persistence.PermissionStringTypeHandler})
+	</insert>
+	
+	<update id="updateRole" parameterType="hn.join.fieldwork.domain.Role">
+		update tbl_role
+			set role_name=#{roleName,jdbcType=VARCHAR},
+			permissions=#{permissions,typeHandler=hn.join.fieldwork.persistence.PermissionStringTypeHandler}
+			where role_id=#{id,jdbcType=INTEGER}
+	</update>
+	
+	<delete id="deleteRole" parameterType="java.lang.Integer">
+		delete from tbl_role where role_id=#{roleId}
+	</delete>
+	
+	<select id="listAllRoles" resultMap="roleMap">
+		select role_id,role_name from tbl_role where role_id!=1
+	</select>
+	
+	
+	
+
+
+</mapper>

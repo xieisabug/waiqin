@@ -1,0 +1,204 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hn.join.fieldwork.persistence.WorkOrderMapper">
+
+<resultMap type="hn.join.fieldwork.domain.WorkOrder" id="workOrderMap">
+	<id column="work_order_id" property="id" jdbcType="BIGINT" />
+	<result column="work_order_no" property="workOrderNo" jdbcType="VARCHAR" />
+	<result column="order_token" property="orderToken" jdbcType="VARCHAR" />
+	<result column="service_date" property="serviceDate" jdbcType="TIMESTAMP" />
+	<result column="work_order_type" property="workOrderType" jdbcType="VARCHAR" />
+	<result column="visit_type" property="visitType" jdbcType="VARCHAR" />
+	<result column="area_code" property="areaCode" jdbcType="VARCHAR" />
+	<result column="charge_type" property="chargeType" jdbcType="VARCHAR" />
+	<result column="charge_money" property="chargeMoney" jdbcType="FLOAT" />
+	<result column="description" property="description" jdbcType="VARCHAR" />
+	<result column="customer_id" property="customerId" jdbcType="BIGINT" />
+	<result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+	<result column="link_person" property="linkPerson" jdbcType="VARCHAR"/>
+	<result column="customer_tel" property="customerTel" jdbcType="VARCHAR" />
+	<result column="customer_mobile" property="customerMobile" jdbcType="VARCHAR" />
+	<result column="customer_address" property="customerAddress" jdbcType="VARCHAR" />
+	<result column="expect_arrive_time" property="expectArriveTime" jdbcType="TIMESTAMP" />
+	<result column="urgency" property="urgency" jdbcType="INTEGER" />
+	<result column="receive_time" property="receiveTime" jdbcType="TIMESTAMP" />
+	<result column="dispatch_time" property="dispatchTime" jdbcType="TIMESTAMP" />
+	<result column="confirm_time" property="confirmTime" jdbcType="TIMESTAMP" />
+	<result column="view_time" property="viewTime" jdbcType="TIMESTAMP" />
+	<result column="accept_time" property="acceptTime" jdbcType="TIMESTAMP" />
+	<result column="reassign_time" property="reassignTime" jdbcType="TIMESTAMP" />
+	<result column="call_time" property="callTime" jdbcType="TIMESTAMP" />
+	<result column="arrival_time" property="arrivalTime" jdbcType="TIMESTAMP" />
+	<result column="finish_Time" property="finishTime" jdbcType="TIMESTAMP" />
+	<result column="status" property="status" jdbcType="VARCHAR" />
+	<result column="field_worker_id" property="fieldWorkerId" jdbcType="BIGINT" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+    <result column="product_status" property="productStatus" jdbcType="VARCHAR" />
+    <result column="handle_result" property="handleResult" jdbcType="VARCHAR" />
+    <result column="return_product_id" property="returnProductId" jdbcType="INTEGER" />
+	<association property="customer" column="customer_id" select="hn.join.fieldwork.persistence.CustomerMapper.getById" />
+	<association property="fieldworker" column="field_worker_id" select="hn.join.fieldwork.persistence.FieldWorkerMapper.getById" />
+</resultMap>
+
+
+
+
+<sql id="base_column_list">
+	work_order_id,work_order_no,order_token,service_date,work_order_type,visit_type,area_code,charge_type,charge_money,description,customer_id,customer_name,link_person,customer_tel,customer_mobile,customer_address,expect_arrive_time,urgency,receive_time,dispatch_time,confirm_time,accept_time,reassign_time,arrival_time,finish_Time,status,field_worker_id,reason,product_status,handle_result,return_product_id
+</sql>
+
+<insert id="insertWorkOrder" parameterType="hn.join.fieldwork.domain.WorkOrder">
+	<selectKey resultType="java.lang.Long" keyProperty="id"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+	</selectKey>
+	insert into tbl_work_order(work_order_no,order_token,service_date,work_order_type,visit_type,area_code,charge_type,charge_money,description,customer_id,customer_name,link_person,
+customer_tel,customer_mobile,customer_address,expect_arrive_time,urgency,receive_time,dispatch_time,status,field_worker_id,product_status,handle_result,return_product_id)
+	values(#{workOrderNo,jdbcType=VARCHAR},#{orderToken,jdbcType=VARCHAR},#{serviceDate,jdbcType=TIMESTAMP},#{workOrderType,jdbcType=VARCHAR},#{visitType,jdbcType=VARCHAR},#{areaCode,jdbcType=VARCHAR},#{chargeType,jdbcType=VARCHAR},#{chargeMoney,jdbcType=FLOAT},#{description,jdbcType=VARCHAR},#{customerId,jdbcType=INTEGER},#{customerName,jdbcType=VARCHAR},#{linkPerson,jdbcType=VARCHAR},#{customerTel,jdbcType=VARCHAR},#{customerMobile,jdbcType=VARCHAR},#{customerAddress,jdbcType=VARCHAR},#{expectArriveTime,jdbcType=TIMESTAMP},#{urgency,jdbcType=INTEGER},#{receiveTime,jdbcType=TIMESTAMP},#{dispatchTime,jdbcType=TIMESTAMP},#{status,jdbcType=VARCHAR},#{fieldWorkerId,jdbcType=BIGINT},#{productStatus,jdbcType=VARCHAR},#{handleResult,jdbcType=VARCHAR},#{returnProductId,jdbcType=INTEGER})
+</insert>
+
+<update id="updateWorkOrder" parameterType="hn.join.fieldwork.domain.WorkOrder">
+	update tbl_work_order set order_token=#{orderToken,jdbcType=VARCHAR},service_date=#{serviceDate,jdbcType=TIMESTAMP},work_order_type=#{workOrderType,jdbcType=VARCHAR},visit_type=#{visitType,jdbcType=VARCHAR},area_code=#{areaCode,jdbcType=VARCHAR},charge_type=#{chargeType,jdbcType=VARCHAR},charge_money=#{chargeMoney,jdbcType=FLOAT},
+	description=#{description,jdbcType=VARCHAR},customer_id=#{customerId,jdbcType=INTEGER},customer_name=#{customerName,jdbcType=VARCHAR},link_person=#{linkPerson,jdbcType=VARCHAR},customer_tel=#{customerTel,jdbcType=VARCHAR},customer_mobile=#{customerMobile,jdbcType=VARCHAR},customer_address=#{customerAddress,jdbcType=VARCHAR},expect_arrive_time=#{expectArriveTime,jdbcType=TIMESTAMP},urgency=#{urgency,jdbcType=INTEGER},receive_time=#{receiveTime,jdbcType=TIMESTAMP},dispatch_time=#{dispatchTime,jdbcType=TIMESTAMP},status=#{status,jdbcType=VARCHAR},field_worker_id=#{fieldWorkerId,jdbcType=BIGINT},product_status=#{productStatus,jdbcType=VARCHAR},handle_result=#{handleResult,jdbcType=VARCHAR},return_product_id=#{returnProductId,jdbcType=INTEGER} 
+	where work_order_no = #{workOrderNo,jdbcType=VARCHAR}
+</update>
+
+
+<select id="getById" resultMap="workOrderMap" parameterType="java.lang.Long">
+	select <include refid="base_column_list"/> from tbl_work_order where work_order_id=#{orderId}
+</select>
+
+<select id="getByWorkOrderNo" resultMap="workOrderMap" parameterType="java.lang.String">
+	select <include refid="base_column_list"/> from tbl_work_order where work_order_no=#{workOrderNo}
+</select>
+
+
+
+
+<update id="updateWhenConfirm">
+	update tbl_work_order set confirm_time=#{confirmTime,jdbcType=TIMESTAMP},
+		status='confirm'
+	where work_order_no=#{workOrderNo}
+</update>
+
+
+<update id="updateWhenView">
+	update tbl_work_order set view_time=#{viewTime,jdbcType=TIMESTAMP},
+		status='view'
+	where work_order_no=#{workOrderNo}
+</update>
+
+<update id="updateWhenTimeout">
+    update tbl_work_order set status='timeout' where work_order_no=#{workOrderNo}
+</update>
+
+
+<update id="updateWhenAccept">
+	update tbl_work_order set accept_time=#{acceptTime,jdbcType=TIMESTAMP},
+		status='accept'
+	where work_order_no=#{workOrderNo}
+</update>
+
+<update id="updateWhenReassign">
+	update tbl_work_order set reassign_time=#{reassignTime,jdbcType=TIMESTAMP},
+		reason=#{reason,jdbcType=VARCHAR},
+		status='reassign'
+	where work_order_no=#{workOrderNo}
+</update>
+
+<update id="updateWhenCallCustomer">
+	update tbl_work_order set call_time=#{callTime,jdbcType=TIMESTAMP},
+		status='call'
+	where work_order_no=#{workOrderNo}
+</update>
+
+
+<update id="updateWhenArrival">
+	update tbl_work_order set arrival_time=#{arrivalTime,jdbcType=TIMESTAMP},
+		status='arrival'
+	where work_order_no=#{workOrderNo}
+</update>
+
+<update id="updateWhenFinish">
+	update tbl_work_order set finish_Time=#{finishTime,jdbcType=TIMESTAMP},
+		status='finish'
+	where work_order_no=#{workOrderNo}
+</update>
+
+<select id="findUnfinishedWorkOrdersByFieldWorkerId" parameterType="java.lang.Long" resultType="java.lang.String">
+	select work_order_no from tbl_work_order where field_worker_id=#{fieldWorkerId}
+</select>
+
+<select id="findFieldWorkerIdByWorkOrderNo" parameterType="java.lang.String" resultType="java.lang.Long">
+	select field_worker_id from tbl_work_order where work_order_no=#{workOrderNo}
+</select>
+
+<resultMap type="hn.join.fieldwork.web.command.WorkOrderLess" id="workOrderLessMap">
+	<id column="work_order_no" property="workOrderNo" jdbcType="VARCHAR" />
+	<result column="order_token" property="orderToken" jdbcType="VARCHAR" />
+	<result column="work_order_type" property="workOrderType" jdbcType="VARCHAR" />
+	<result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+	<result column="finish_Time" property="finishTime" jdbcType="TIMESTAMP" />
+</resultMap>
+
+<select id="findByBetweenFinishTime" resultMap="workOrderLessMap">
+	select work_order_no,order_token,work_order_type,customer_name,finish_Time from tbl_work_order
+where  field_worker_id=#{fieldWorkerId} and finish_time &gt;= #{fromTime} and finish_time &lt; #{toTime}
+</select>
+
+<select id="getCustomerMobileByWorkOrderNo" parameterType="java.lang.String" resultType="java.lang.String">
+	select customer_mobile from tbl_work_order where work_order_no=#{workOrderNo}
+</select>
+
+<select id="countWorkOrderTimeoutBy" resultType="java.lang.Long">
+	select count(tbl_work_order.work_order_no) from tbl_work_order inner join tbl_fieldworker on tbl_work_order.field_worker_id = tbl_fieldworker.field_worker_id 
+	where tbl_work_order.status='timeout' 
+		<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(fullname)">
+			AND tbl_fieldworker.fullname like concat('%',#{fullname},'%')
+		</if>
+		<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(city)">
+			AND tbl_work_order.area_code = #{city}
+		</if>
+</select>
+
+<resultMap type="hn.join.fieldwork.web.command.WorkOrderTimeout" id="workOrderTimeoutMap">
+	<id column="work_order_no" property="workOrderNo" jdbcType="VARCHAR" />
+	<result column="work_order_type" property="workOrderType" jdbcType="VARCHAR" />
+	<result column="service_date" property="serviceDate" jdbcType="TIMESTAMP" />
+	<result column="fullname" property="fullname" jdbcType="VARCHAR" />
+	<result column="department_name" property="departmentName" jdbcType="VARCHAR" />
+	<result column="customer_id" property="customerId" jdbcType="INTEGER" />
+	<result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+</resultMap>
+
+<select id="findWorkOrderTimeoutBy" resultMap="workOrderTimeoutMap">
+	select tbl_work_order.work_order_no,tbl_work_order.work_order_type,tbl_work_order.service_date,tbl_work_order.customer_id,tbl_work_order.customer_name,tbl_fieldworker.fullname,tbl_department.department_name from tbl_work_order inner join tbl_fieldworker on tbl_work_order.field_worker_id = tbl_fieldworker.field_worker_id inner join tbl_department on tbl_fieldworker.department_id = tbl_department.department_id
+	where tbl_work_order.status='timeout' 
+		<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(fullname)">
+			AND tbl_fieldworker.fullname like concat('%',#{fullname},'%')
+		</if>
+		<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(city)">
+			AND tbl_work_order.area_code = #{city}
+		</if>
+	order by tbl_work_order.confirm_time desc
+		<if test="limit !=null">
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+</select>
+
+<select id="countStatusByWorkOrderNo" resultType="java.lang.Long">
+	select count(tbl_work_order.work_order_no) from tbl_work_order where tbl_work_order.work_order_no=#{workOrderNo} and ${statusField} is not null
+</select>
+
+<delete id="deleteStaleOrder">
+	delete tbl_work_order,tbl_work_order_receipt,tbl_work_order_problem from tbl_work_order left join tbl_work_order_receipt on tbl_work_order.work_order_no=tbl_work_order_receipt.work_order_no left join tbl_work_order_problem on tbl_work_order.work_order_no=tbl_work_order_problem.work_order_no where tbl_work_order.service_date &lt; date_sub(now(), interval 30 day)
+</delete> 
+
+<select id="findCustomerIdByWorkOrderNo" parameterType="java.lang.String" resultType="java.lang.Long">
+	select customer_id from tbl_work_order where work_order_no=#{workOrderNo}
+</select>
+
+
+
+</mapper>

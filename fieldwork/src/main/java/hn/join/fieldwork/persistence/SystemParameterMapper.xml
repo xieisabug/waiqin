@@ -1,0 +1,23 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hn.join.fieldwork.persistence.SystemParameterMapper">
+
+	<resultMap type="hn.join.fieldwork.domain.SystemParameter" id="systemParameterMap">
+		<id column="param_name" property="paramName" jdbcType="VARCHAR" />
+		<result column="param_value" property="paramValue" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<insert id="insertSystemParameter" parameterType="hn.join.fieldwork.domain.SystemParameter">
+		insert into tbl_system_parameter(param_name,param_value) values(#{paramName,jdbcType=VARCHAR},#{paramValue,jdbcType=VARCHAR})
+	</insert>
+	
+	<select id="loadAll" resultMap="systemParameterMap">
+		select param_name,param_value from tbl_system_parameter 
+	</select>
+
+	<update id="updateSystemParameter">
+		update tbl_system_parameter set param_value=#{paramValue,jdbcType=VARCHAR} where param_name=#{paramName}
+	</update>
+
+</mapper>

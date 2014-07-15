@@ -1,0 +1,318 @@
+html{
+    background:#DDDDDD;
+}
+body{
+    font-family:"微软雅黑",Helvetica,"Nimbus Sans L",sans-serif;
+    width: 1024px;
+    margin: auto;
+    background: #fafafa;
+}
+a{
+    text-decoration: none;
+    outline: none;
+}
+a:hover{
+	color:blue;
+}
+hr{
+    border: none;
+    border-top:1px solid #dddddd;
+    margin:0px;
+}
+textarea{
+    resize: none
+}
+ul{
+	margin-left:0px;
+}
+li{
+    list-style-type: none;
+    padding: 10px
+}
+li.hiddenLi{
+	display:none
+}
+tr.highLight{
+    background: #9acd32
+}
+.hidden{
+	display:none;
+}
+.loadingMsgDetail{
+   width: 100px;
+    margin-left: 10px;
+    background: url(../../images/loading.gif) no-repeat;
+    padding-left: 20px;
+    height: 100%;
+}
+#load{
+	position:absolute;
+	top:0;
+	left:0;
+	color:white;
+	text-align:center;
+	background:gray;
+	zIndex:6666;
+	height:100%;
+	width:100%
+}
+#header{
+    height: 85px;
+    background: #267899;
+    position: relative;
+}
+
+#headerRight{
+    position: absolute;
+    top:55px;
+    left:930px
+}
+#headerRight a{
+    text-decoration: none;
+    margin-left: 10px;
+    color:#ffffff;
+    font-size: 12pt;
+    padding-left:35px
+}
+
+#header .logout{
+    background: url(../../images/logout_bg.png) no-repeat left center;
+}
+#header .logout:hover{
+    background: url(../../images/logout_hover_bg.png) no-repeat left center;
+    color:yellow
+}
+#menu{
+    height: 40px;
+    background: url(../../images/menu_bg.png) repeat-x
+}
+#menu ul{
+    margin: 0 0 0 15px;
+    padding: 0px ;
+    height: 30px;
+    padding-top: 10px
+}
+#menu li{
+    float: left;
+    padding:0 5px
+}
+#menu a{
+    color: #595757;
+    font-size: 11pt;
+    height: 30px;
+    font-family: "微软雅黑";
+    font-weight: bold;
+    text-align: center;
+    width: 78px;
+    display: inline-block;
+    line-height: 30px;
+}
+#menu a:hover{
+    color:#231815;
+    background: url(../../images/menu_hover_bg.png) no-repeat
+}
+#menu a.active{
+    color:#036EB8;
+    background: url(../../images/menu_focus_bg.png) no-repeat
+}
+#center{
+    min-height: 560px;
+    width: 100%
+}
+.tree{
+	display:inline-block;
+	vertical-algin:top;
+}
+/*增加、修改员工*/
+#submitForm li,#addSubmitForm li{
+    padding: 5px;
+    list-style: none;
+    float: none;
+    font-size: 14px
+}
+.spanText{
+    width:200px;
+    text-align: left;
+    display: inline-block;
+    color:#777777;
+    vertical-align: top
+}
+.systemUl{
+	margin-left:100px;
+}
+.systemUl .labelTitle{
+	width:200px;
+     text-align: right;
+     display: inline-block;
+     color:#777777
+}
+.labelTitle{
+     width:140px;
+     text-align: right;
+     display: inline-block;
+     color:#777777
+ }
+.labelClientTitle{
+    width:80px;
+    text-align: right;
+    display: inline-block;
+    color:#777777
+}
+.inputBox{
+    width: 180px;
+    height: 25px;
+    line-height:25px;
+    display: inline-block;
+    vertical-align: middle;
+    border: 1px solid #dddddd
+}
+.inputBox:hover{
+    border-color: #009FCC;
+}
+.inputBox:focus{
+    border-color: #009FCC;
+    background: #F8F8F8
+}
+.inputBoxReadonly{
+    width: 180px;
+    height: 25px;
+    line-height:25px;
+    display: inline-block;
+    vertical-align: middle;
+    background:#DDDDDD
+}
+.btnLi{
+    padding-left: 150px!important;
+}
+.inputCountBox{
+    width: 280px;
+    height: 25px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.inputCountBoxReadonly{
+    width: 280px;
+    height: 25px;
+    display: inline-block;
+    vertical-align: middle;
+    background:#DDDDDD
+}
+ div.tip{
+     display: inline-block;
+     /*下两句是为兼容ie7设置*/
+     zoom:1;
+     *display:inline;
+     font-size: 16px;
+     height: 94%;
+     vertical-align: top;
+     width: 255px;
+     margin-bottom: 0px;
+     margin-top:5px
+ }
+.syncTb{
+     height:auto;
+     margin-bottom:3px
+}
+.textareaBox{
+    display: inline-block;
+    vertical-align: middle;
+    width: 500px;
+    height: 100px
+}
+.inputBtn{
+    background: url(../../images/btn_bg.png) no-repeat left top;
+    border:none;
+    height: 24px;
+    width: 80px;
+    font-size:14px;
+    /* color:#F5F5F5; */
+}
+.inputBtn:hover{
+    cursor: pointer;
+    background-position: left bottom;
+}
+.addBtn{
+	 background: url(../../images/btn_add.png) no-repeat left top;
+     border:none;
+    height: 24px;
+    width: 80px;
+    font-size:14px;
+    /* color:#F5F5F5; */
+}
+.addBtn:hover{
+    cursor: pointer;
+    background-position: left bottom;
+}
+.searchBtn{
+	 background: url(../../images/btn_search.png) no-repeat left top;
+     border:none;
+    height: 24px;
+    width: 80px;
+    font-size:14px;
+    margin-left:5px;
+    /* color:#F5F5F5; */
+    vertical-align:bottom;
+}
+.searchBtn:hover{
+    cursor: pointer;
+    background-position: left bottom;
+}
+#mapContainer{
+    width: 100%;
+    height: 630px;
+    *height:625px;
+}
+#countForm li{
+    padding: 10px;
+}
+#footer{
+	background:url(../../images/footer_bg.png) repeat-x;
+    text-align:center;
+    height:40px;
+}
+#footer div{
+	padding-top:10px
+}
+.panel-body-noheader{
+    border-top:0;
+}
+.datagrid-toolbar{
+    background: none repeat scroll 0 0 #FAFAFA;
+}
+.validatebox-invalid{
+    background-position: right center;
+}
+td a{
+    color:#444444
+}
+.searchbox{
+    margin: 5px 0 5px 0;
+}
+.datagrid-row {
+    height: 30px;
+}
+.tabs-container{
+	background:#fafafa;
+	vertical-align:top;
+    display:inline-block;
+	*display:inline;
+	zoom:1;
+}
+.tabs-header{
+	border:none;
+	background:#fafafa
+}
+
+.datagrid-cell{
+	text-overflow:ellipsis
+}
+.tree li{
+	padding:3px;
+}
+/*下拉框控件的样式*/
+.combobox-item-hover{
+	background:	#888888
+}
+#workersPanel .combo,#workersPanel .searchbox{
+	margin-left:10px;
+}

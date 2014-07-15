@@ -1,0 +1,113 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hn.join.fieldwork.persistence.CheckinMapper">
+
+	<resultMap type="hn.join.fieldwork.domain.Checkin" id="checkinMap">
+		<id column="checkin_id" property="id" jdbcType="BIGINT" />
+		<result column="field_worker_id" property="fieldWorkerId" jdbcType="BIGINT"/>
+		<result column="user_checkin_time" property="userCheckinDateTime" jdbcType="TIMESTAMP" />
+		<result column="system_checkin_time" property="systemCheckinDateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<resultMap type="hn.join.fieldwork.web.command.CheckinCommand" id="checkinCommandMap">
+		<id column="checkin_id" property="checkinId" jdbcType="BIGINT" />
+		<result column="field_worker_id" property="fieldWorkerId" jdbcType="BIGINT" />
+		<result column="field_worker_name" property="fieldWorkerName" jdbcType="VARCHAR" />
+		<!-- <result column="department_id" property="departmentId" jdbcType="INTEGER" />
+		<result column="department_code" property="departmentCode" jdbcType="VARCHAR" /> -->
+		<result column="department_name" property="departmentName" jdbcType="VARCHAR" />
+		<result column="user_checkin_time" property="userCheckinDateTime" jdbcType="TIMESTAMP" />
+		<result column="system_checkin_time" property="systemCheckinDateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	
+	<insert id="insertCheckin" parameterType="hn.join.fieldwork.domain.Checkin">
+		<selectKey resultType="java.lang.Long" keyProperty="id"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into tbl_checkin(field_worker_id,user_checkin_time,system_checkin_time) values (#{fieldWorkerId,jdbcType=BIGINT},#{userCheckinDateTime,jdbcType=TIMESTAMP},#{systemCheckinDateTime,jdbcType=TIMESTAMP})
+	</insert>
+	
+	<insert id="insertCheckinList" parameterType="java.util.List">
+		 INSERT INTO tbl_checkin(field_worker_id,user_checkin_time,system_checkin_time)
+		 VALUES
+		<foreach collection="list" item="checkin" index="index"	separator=",">
+			(#{checkin.fieldWorkerId,jdbcType=BIGINT},#{checkin.userCheckinDateTime,jdbcType=TIMESTAMP},#{checkin.systemCheckinDateTime,jdbcType=TIMESTAMP})
+		</foreach>
+	</insert>
+	
+	<select id="getCheckinIdByFieldWorkerIdAndSystemCheckinDateTime" resultType="java.lang.Long">
+		select checkin_id from tbl_checkin where field_worker_id=#{fieldWorkerId,jdbcType=BIGINT} and system_checkin_time=#{systemCheckinDateTime,jdbcType=TIMESTAMP}
+	</select>
+	
+	<update id="updateUserCheckinDateTimeByCheckinId">
+		update tbl_checkin set user_checkin_time=#{userCheckinDateTime,jdbcType=TIMESTAMP} where checkin_id=#{checkinId}
+	</update>
+	
+
+
+<!--
+	<select id="findByDateSpan" resultMap="checkinCommandMap">
+		select tbl_checkin.checkin_id,tbl_checkin.field_worker_id,tbl_checkin.checkin_time,tbl_fieldworker.field_worker_name,tbl_fieldworker.department_id,tbl_department.department_code,tbl_department.department_name
+	from tbl_checkin inner join tbl_fieldworker on tbl_checkin.field_worker_id=tbl_fieldworker.field_worker_id
+	inner join tbl_department on tbl_fieldworker.department_id=tbl_department.department_id
+	<trim prefix="WHERE" prefixOverrides="AND |OR ">
+		<if test="fromTime!=null">
+				AND tbl_checkin.checkin_time &gt;= #{fromTime}
+		</if>
+		<if test="toTime !=null">
+				AND tbl_checkin.checkin_time &lt; #{toTime}
+		</if>
+		<if test="departmentId!=null">
+				AND tbl_department.department_id=#{departmentId}
+		</if>
+		<if test="fieldWorkerId!=null">
+				AND tbl_checkin.field_worker_id=#{fieldWorkerId}
+		</if>
+	</trim>
+	</select>
+ -->
+ 
+	<select id="countBy" resultType="java.lang.Long">
+		select count(tbl_fieldworker.field_worker_id) from tbl_checkin right join tbl_fieldworker on tbl_checkin.field_worker_id=tbl_fieldworker.field_worker_id inner join tbl_department on tbl_fieldworker.department_id=tbl_department.department_id
+	where tbl_checkin.system_checkin_time &gt; #{fromDate} and tbl_checkin.system_checkin_time &lt;= date_add(#{toDate}, interval 1 day)
+		<if test="showAll == false">
+			and (tbl_checkin.user_checkin_time &gt; tbl_checkin.system_checkin_time or tbl_checkin.user_checkin_time is null)
+		</if>
+		<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(fieldWorkerName)">
+			and tbl_fieldworker.fullname like CONCAT('%', #{fieldWorkerName}, '%')
+		</if>
+		<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(city)">
+			and tbl_department.city = #{city} 
+		</if>
+	</select>
+	
+	<select id="findBy" resultMap="checkinCommandMap">
+		select tbl_checkin.checkin_id,tbl_fieldworker.field_worker_id,tbl_fieldworker.fullname as field_worker_name,tbl_department.department_name,tbl_checkin.user_checkin_time,tbl_checkin.system_checkin_time
+	from tbl_checkin right join tbl_fieldworker on tbl_checkin.field_worker_id=tbl_fieldworker.field_worker_id
+	inner join tbl_department on tbl_fieldworker.department_id=tbl_department.department_id
+	where tbl_checkin.system_checkin_time &gt; #{fromDate} and tbl_checkin.system_checkin_time &lt;= date_add(#{toDate}, interval 1 day)
+		<if test="showAll == false">
+			and (tbl_checkin.user_checkin_time &gt; tbl_checkin.system_checkin_time or tbl_checkin.user_checkin_time is null)
+		</if>
+		<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(fieldWorkerName)">
+			and tbl_fieldworker.fullname like CONCAT('%', #{fieldWorkerName}, '%')
+		</if>
+		<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(city)">
+			and tbl_department.city = #{city} 
+		</if>
+		order by tbl_checkin.system_checkin_time desc,tbl_fieldworker.department_id asc
+		<if test="limit !=null">
+				LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+	
+	
+	<delete id="deleteStaleCheckin">
+		delete from tbl_checkin where user_checkin_time &lt; date_sub(now(), interval 60 day)
+	</delete>
+
+
+</mapper>

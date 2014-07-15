@@ -1,0 +1,196 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hn.join.fieldwork.persistence.CustomerMapper">
+
+	<resultMap type="hn.join.fieldwork.domain.Customer" id="customerMap">
+		<id column="customer_id" property="id" jdbcType="BIGINT" />
+		<result column="customer_address" property="customerAddress"
+			jdbcType="VARCHAR" />
+		<result column="customer_name" property="customerName"
+			jdbcType="VARCHAR" />
+		<result column="customer_contact" property="contact" jdbcType="VARCHAR" />
+		<result column="area_code" property="areaCode" jdbcType="VARCHAR" />
+		<result column="customer_county" property="county" jdbcType="VARCHAR" />
+		<result column="latitude" property="latitude" jdbcType="FLOAT" />
+		<result column="longitude" property="longitude" jdbcType="FLOAT" />
+		<result column="tax_code" property="taxCode" jdbcType="VARCHAR" />
+		<result column="department_id" property="departmentId" jdbcType="INTEGER" />
+		<result column="revenue_id" property="revenueId" jdbcType="INTEGER" />
+		<result column="customer_tel" property="tel" jdbcType="VARCHAR" />
+		<result column="customer_mobile" property="mobile" jdbcType="VARCHAR" />
+		<result column="tag" property="tag" jdbcType="TINYINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		
+		<!-- <collection property="journals" column="customer_id" select="findJournalByCustomerId" /> -->
+	</resultMap>
+
+<!-- 
+	<resultMap type="hn.join.fieldwork.domain.CustomerJournal"
+		id="customerJournalMap">
+		<id column="customer_jounral_id" property="id" jdbcType="BIGINT" />
+		<result column="memo" property="memo" jdbcType="VARCHAR" />
+		<result column="previous_state" property="previousState"
+			jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<association property="operator" column="operator_id"
+			select="hn.join.fieldwork.persistence.UserMapper.getById" />
+	</resultMap>
+
+ -->
+	<sql id="customer_column_list">
+		customer_id,customer_address,customer_name,customer_contact,area_code,customer_county,latitude,longitude,tax_code,department_id,revenue_id,customer_mobile,customer_tel,tag,create_time
+	</sql>
+<!-- 
+	<sql id="journal_column_list">
+		customer_journal_id,memo,previous_state,create_time,operator_id
+	</sql>
+
+ -->
+ 	<select id="getById" parameterType="java.lang.Long" resultMap="customerMap">
+		select
+		<include refid="customer_column_list" />
+		from tbl_customer
+		where customer_id=#{customerId}
+	</select>
+
+	<insert id="insertCustomer" parameterType="hn.join.fieldwork.domain.Customer">
+		INSERT INTO	tbl_customer(customer_id,customer_address,customer_name,customer_contact,area_code,customer_county,latitude,longitude,tax_code,department_id,revenue_id,customer_mobile,customer_tel,tag,create_time)
+		VALUES(#{id,jdbcType=INTEGER},#{customerAddress,jdbcType=VARCHAR},#{customerName,jdbcType=VARCHAR},#{contact,jdbcType=VARCHAR},#{areaCode,jdbcType=VARCHAR},#{county,jdbcType=VARCHAR},#{latitude,jdbcType=FLOAT},#{longitude,jdbcType=FLOAT},#{taxCode,jdbcType=VARCHAR},#{departmentId,jdbcType=INTEGER},#{revenueId,jdbcType=INTEGER},#{mobile,jdbcType=VARCHAR},#{tel,jdbcType=VARCHAR},#{tag,jdbcType=TINYINT},now())
+	</insert>
+<!-- 
+	<insert id="insertCustomerJournal">
+		<selectKey resultType="java.lang.Long" keyProperty="id"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into
+		tbl_customer_journal(customer_id,memo,previous_state,create_time,operator_id)
+		values(#{customerId,jdbcType=BIGINT},#{journal.memo,jdbcType=VARCHAR},#{journal.previousState,jdbcType=VARCHAR},now(),#{operatorId,jdbcType=BIGINT})
+	</insert>
+-->
+<!-- 
+	<select id="findJournalByCustomerId" parameterType="java.lang.Long" resultMap="customerJournalMap">
+		select <include refid="journal_column_list"/> from tbl_customer_journal
+		where customer_id=#{customerId}
+	</select>
+-->	
+	
+	<update id="updateCustomer" parameterType="hn.join.fieldwork.domain.Customer">
+		update tbl_customer 
+			set customer_address=#{customerAddress,jdbcType=VARCHAR},
+			customer_name=#{customerName,jdbcType=VARCHAR},
+			customer_contact=#{contact,jdbcType=VARCHAR},
+			area_code=#{areaCode,jdbcType=VARCHAR},
+			customer_county=#{county,jdbcType=VARCHAR},
+			latitude=#{latitude,jdbcType=FLOAT},
+			longitude=#{longitude,jdbcType=FLOAT},
+			tax_code=#{taxCode,jdbcType=VARCHAR},
+			department_id=#{departmentId,jdbcType=INTEGER},
+			revenue_id=#{revenueId,jdbcType=INTEGER},
+			customer_tel=#{tel,jdbcType=VARCHAR},
+			customer_mobile=#{mobile,jdbcType=VARCHAR}
+		where
+			customer_id=#{id,jdbcType=INTEGER}
+	</update>
+	
+	<select id="countById" parameterType="java.lang.Long" resultType="java.lang.Long">
+		select count(customer_id) from tbl_customer where customer_id=#{customerId}
+	</select>
+	
+	
+	<select id="countByAreaCode" resultType="java.lang.Long">
+		SELECT COUNT(customer_id) FROM tbl_customer
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(areaCode)">
+				area_code = #{areaCode} and tag in (1,2,3)
+			</if>
+			<if test="@hn.join.fieldwork.utils.Ognl@isEmpty(areaCode)">
+				tag in (2,3)
+			</if>
+		</trim>
+	</select>
+	
+	<select id="loadByAreaCode" resultMap="customerMap">
+		SELECT <include refid="customer_column_list"/> FROM tbl_customer
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(areaCode)">
+				area_code = #{areaCode} and tag in (1,2,3)
+			</if>
+			<if test="@hn.join.fieldwork.utils.Ognl@isEmpty(areaCode)">
+				tag in (2,3)
+			</if>
+			<if test="@hn.join.fieldwork.utils.Ognl@isNotZero(idStart)">
+				AND customer_id &gt; #{idStart}
+			</if>
+		</trim>
+		ORDER BY customer_id asc,tag desc,area_code asc
+		<if test="limit !=null">
+			LIMIT #{limit}
+		</if>
+	</select>
+	
+	<select id="countBy" resultType="java.lang.Long">
+		SELECT COUNT(customer_id) FROM tbl_customer
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(areaCode)">
+				area_code = #{areaCode}
+			</if>
+			<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(customerAddress)">
+				AND customer_address like #{customerAddress}
+			</if>
+			<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(customerName)">
+				AND  customer_name like #{customerName}
+			</if>
+			<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(tels)">
+				AND tels like #{tels}
+			</if>
+		</trim>
+	</select>
+	
+	<select id="findBy" resultMap="customerMap">
+		SELECT <include refid="customer_column_list"/> FROM tbl_customer
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(areaCode)">
+				area_code = #{areaCode}
+			</if>
+			<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(customerAddress)">
+				AND customer_address like #{customerAddress}
+			</if>
+			<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(customerName)">
+				AND  customer_name like #{customerName}
+			</if>
+			<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(tels)">
+				AND tels like #{tels}
+			</if>
+		</trim>
+		ORDER BY customer_id asc,area_code asc
+		<if test="limit !=null">
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+	
+	
+	<update id="updateCustomerTag">
+		update tbl_customer set tag=#{customerTag} where customer_id in
+		<foreach collection="customerIdList" item="customerId" index="index" open="(" separator="," close=")">
+			#{customerId}
+		</foreach>
+	</update>
+	
+	<select id="countByCoordinate" resultType="java.lang.Long">
+		select count(customer_id) from tbl_customer where latitude=#{latitude} and longitude=#{longitude}
+	</select>
+	
+	<select id="findByCoordinate" resultMap="customerMap">
+		SELECT <include refid="customer_column_list"/> FROM tbl_customer where latitude=#{latitude} and longitude=#{longitude}
+		ORDER BY area_code asc,customer_id asc
+		<if test="limit !=null">
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	
+	</select>
+	
+	
+
+</mapper>

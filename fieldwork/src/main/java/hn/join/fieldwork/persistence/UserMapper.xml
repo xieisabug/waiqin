@@ -1,0 +1,151 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hn.join.fieldwork.persistence.UserMapper">
+
+	<resultMap type="hn.join.fieldwork.domain.User" id="userMap">
+		<id column="user_id" property="id" jdbcType="BIGINT" />
+		<result column="user_name" property="username" jdbcType="VARCHAR" />
+		<result column="fullname" property="fullname" jdbcType="VARCHAR" />
+		<result column="mobile_no" property="mobileNo" jdbcType="VARCHAR" />
+		<result column="tel_no" property="telNo" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="worker_no" property="workerNo" jdbcType="VARCHAR" />
+		<result column="area_code" property="areaCode" jdbcType="VARCHAR" />
+		<result column="role_id" property="roleId" jdbcType="INTEGER" />
+		<association property="role" resultMap="hn.join.fieldwork.persistence.RoleMapper.roleMap" />
+	</resultMap>
+
+	<sql id="base_column_list">
+		tbl_user.user_id,tbl_user.user_name,tbl_user.fullname,tbl_user.mobile_no,tbl_user.tel_no,tbl_user.password,tbl_user.email,tbl_user.worker_no,tbl_user.area_code,tbl_user.role_id,tbl_role.role_name,tbl_role.permissions
+	</sql>
+
+
+	<select id="getById" resultMap="userMap" parameterType="java.lang.Long">
+		select
+		<include refid="base_column_list" />
+		from tbl_user inner join tbl_role on tbl_user.role_id=tbl_role.role_id  where user_id=#{userId}
+	</select>
+
+	<select id="getByUsername" resultMap="userMap" parameterType="java.lang.String">
+		select
+		<include refid="base_column_list" />
+		from tbl_user inner join tbl_role on tbl_user.role_id=tbl_role.role_id where user_name=#{userName}
+	</select>
+
+	<insert id="insertUser" parameterType="hn.join.fieldwork.domain.User">
+		<selectKey resultType="java.lang.Long" keyProperty="id"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into tbl_user(
+		user_name,fullname,mobile_no,tel_no,password,email,worker_no,area_code,role_id)
+		values
+		(#{username,jdbcType=VARCHAR},#{fullname,jdbcType=VARCHAR},#{mobileNo,jdbcType=VARCHAR},#{telNo,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},#{workerNo,jdbcType=VARCHAR},#{areaCode,jdbcType=VARCHAR},#{roleId,jdbcType=VARCHAR})
+	</insert>
+	
+	<update id="updateUser" parameterType="hn.join.fieldwork.domain.User">
+		update tbl_user
+			set fullname=#{fullname,jdbcType=VARCHAR},
+			mobile_no=#{mobileNo,jdbcType=VARCHAR},
+			tel_no=#{telNo,jdbcType=VARCHAR},
+			email=#{email,jdbcType=VARCHAR},
+			area_code=#{areaCode,jdbcType=VARCHAR},
+			role_id=#{roleId,jdbcType=INTEGER}
+		where
+			user_id=#{id,jdbcType=BIGINT}
+	</update>
+	
+	<delete id="deleteUser">
+		DELETE FROM 
+			tbl_user
+		WHERE 
+			user_id IN
+		 <foreach item="userId" index="index" collection="list"
+            open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+	</delete>
+	
+	<update id="updatePersonSetting" parameterType="hn.join.fieldwork.domain.User">
+		update tbl_user set 
+			fullname=#{fullname,jdbcType=VARCHAR},
+			mobile_no=#{mobileNo,jdbcType=VARCHAR},
+			tel_no=#{telNo,jdbcType=VARCHAR},
+			email=#{email,jdbcType=VARCHAR}
+		where
+			user_id=#{id,jdbcType=BIGINT}
+	</update>
+
+
+	<update id="updatePassword">
+		update tbl_user set
+			password=#{password,jdbcType=VARCHAR}
+		where
+			user_id=#{userId,jdbcType=BIGINT}
+	</update>
+	
+	<select id="countBy" resultType="java.lang.Long">
+		select count(user_id) from tbl_user 
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+				<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(fullname)">
+					fullname like #{fullname}
+				</if>
+				<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(mobileNo)">
+					AND mobile_no like #{mobileNo}
+				</if>
+				<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(areaCode)">
+					AND area_code = #{areaCode}
+				</if>
+				<if test="@hn.join.fieldwork.utils.Ognl@isNotZero(selfId)">
+					and user_id != #{selfId}
+				</if>
+		</trim>
+	</select>
+	
+	<select id="findBy" resultMap="userMap">
+		select <include refid="base_column_list"/> from tbl_user inner join tbl_role on tbl_user.role_id=tbl_role.role_id
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+				<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(fullname)">
+					fullname like #{fullname}
+				</if>
+				<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(mobileNo)">
+					AND mobile_no like #{mobileNo}
+				</if>
+				<if test="@hn.join.fieldwork.utils.Ognl@isNotEmpty(areaCode)">
+					AND area_code = #{areaCode}
+				</if>
+				<if test="@hn.join.fieldwork.utils.Ognl@isNotZero(selfId)">
+					and user_id != #{selfId}
+				</if>
+				
+				
+		</trim>
+		order by user_id ASC
+		<if test="limit !=null">
+				LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+	
+	<select id="countByUsername" resultType="java.lang.Long" parameterType="java.lang.String">
+			select count(1) from tbl_user where user_name=#{username}
+	</select>
+	
+	<select id="countByWorkerNo" resultType="java.lang.Long" parameterType="java.lang.String">
+			select count(1) from tbl_user where worker_no=#{workerNo}
+	</select>
+	
+	<select id="countByMobileNo" resultType="java.lang.Long" parameterType="java.lang.String">
+			select count(1) from tbl_user where mobile_no=#{mobileNo}
+	</select>
+	
+	<select id="countByEmail" resultType="java.lang.Long" parameterType="java.lang.String">
+			select count(1) from tbl_user where email=#{email}
+	</select>
+	
+	
+
+
+
+</mapper>

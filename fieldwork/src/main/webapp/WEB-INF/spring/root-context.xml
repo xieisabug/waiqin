@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:hz="http://www.hazelcast.com/schema/spring"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.hazelcast.com/schema/spring http://www.hazelcast.com/schema/spring/hazelcast-spring-2.3.xsd">
+
+    <context:annotation-config/>
+    <context:component-scan base-package="hn.join.fieldwork.security"/>
+    <context:component-scan base-package="hn.join.fieldwork.service"/>
+    <tx:annotation-driven/>
+
+    <bean id="propertyPlaceholderConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>/WEB-INF/jdbc.properties</value>
+                <value>/WEB-INF/mqtt.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+          init-method="init" destroy-method="close">
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="maxActive" value="5"/>
+        <property name="initialSize" value="1"/>
+        <property name="maxWait" value="60000"/>
+        <property name="minIdle" value="1"/>
+        <property name="timeBetweenEvictionRunsMillis" value="3000"/>
+        <property name="minEvictableIdleTimeMillis" value="300000"/>
+        <property name="validationQuery" value="SELECT 1"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="true"/>
+        <property name="testOnReturn" value="true"/>
+    </bean>
+
+    <bean id="mqttConfiguration" class="hn.join.fieldwork.service.MqttConfiguration">
+        <property name="uri" value="${mqtt.uri}"/>
+        <property name="clientId" value="${mqtt.clientId}"/>
+        <property name="retain" value="${mqtt.retain}"/>
+    </bean>
+
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="/WEB-INF/mybatis-configuration.xml"/>
+        <property name="typeAliasesPackage" value="hn.join.fieldwork.domain"/>
+        <property name="mapperLocations" value="classpath*:hn/join/fieldwork/persistence/*.xml"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="hn.join.fieldwork.persistence"/>
+    </bean>
+
+    <bean id="webSecurityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <!-- Single realm app (realm configured next, below). If you have multiple
+            realms, use the 'realms' property instead. -->
+        <property name="realm" ref="myAuthorizingRealm"/>
+        <property name="cacheManager" ref="webCacheManager"/>
+        <property name="sessionManager" ref="webSessionManager"/>
+    </bean>
+
+    <bean id="webCacheManager"
+          class="hn.join.fieldwork.cache.HazelcastAdapterShiroCacheManager">
+        <property name="clientConfigLocation" value="/WEB-INF/hazelcast-client.properties"/>
+    </bean>
+
+    <bean id="webSessionManager"
+          class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <property name="sessionDAO" ref="webSessionDAO"/>
+        <property name="sessionValidationInterval" value="30000"/>
+        <property name="globalSessionTimeout" value="1800000"/>
+    </bean>
+
+    <bean id="webSessionDAO"
+          class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
+        <property name="activeSessionsCacheName" value="shiro-web-activeSessionCache"/>
+    </bean>
+
+
+    <!-- Post processor that automatically invokes init() and destroy() methods -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+    <!-- Define the Shiro Filter here (as a FactoryBean) instead of directly
+        in web.xml - web.xml uses the DelegatingFilterProxy to access this bean.
+        This allows us to wire things with more control as well utilize nice Spring
+        things such as PropertiesPlaceholderConfigurer and abstract beans or anything
+        else we might need: -->
+    <bean id="webShiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="webSecurityManager"/>
+        <property name="loginUrl" value="/web/login"/>
+        <property name="successUrl" value="/web/home"/>
+        <property name="unauthorizedUrl" value="/unauthorized"/>
+        <!-- The 'filters' property is usually not necessary unless performing
+            an override, which we want to do here (make authc point to a PassthruAuthenticationFilter
+            instead of the default FormAuthenticationFilter: -->
+        <property name="filters">
+            <util:map>
+                <entry key="authc">
+                    <bean
+                            class="hn.join.fieldwork.web.CompatibleAjaxPassThruAuthenticationFilter"/>
+                </entry>
+            </util:map>
+        </property>
+        <property name="filterChainDefinitions">
+            <value>
+                /web/reset_password=anon
+                /web/valid_reset_password=anon
+                /web/do_reset_password=anon
+                /web/work-order/new=anon
+                /web/** = authc
+            </value>
+        </property>
+    </bean>
+
+    <hz:client id="client">
+        <hz:member>localhost:5701</hz:member>
+    </hz:client>
+
+
+    <hz:map id="latestFieldWorkerInfoMap" instance-ref="client" name="latestFieldWorkerInfoMap" lazy-init="false"/>
+
+    <hz:multiMap id="areaCode2FieldWorkerMap" instance-ref="client" name="areaCode2FieldWorkerMap" lazy-init="false"/>
+
+    <hz:lock id="fieldWorkerWriteLock" name="fieldWorkerWriteLock" instance-ref="client"/>
+
+    <bean class="hn.join.fieldwork.service.FieldWorkerUpdateListener">
+        <property name="latestFieldWorkerInfoMap" ref="latestFieldWorkerInfoMap"/>
+        <property name="areaCode2FieldWorkerMap" ref="areaCode2FieldWorkerMap"/>
+        <property name="fieldWorkerWriteLock" ref="fieldWorkerWriteLock"/>
+    </bean>
+
+
+    <bean name="checkinJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+        <property name="jobClass" value="hn.join.fieldwork.service.CheckinJob"/>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="checkinTask" value-ref="checkinTask"/>
+            </map>
+        </property>
+    </bean>
+
+
+    <bean id="checkinCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="checkinJob"/>
+        <property name="cronExpression" value="1 0 0 * * ?"/>
+    </bean>
+
+
+    <bean name="orderTokenJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+        <property name="jobClass" value="hn.join.fieldwork.service.OrderTokenJob"/>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="orderTokenTask" value-ref="orderTokenTask"/>
+            </map>
+        </property>
+
+    </bean>
+
+
+    <bean id="orderTokenCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="orderTokenJob"/>
+        <property name="cronExpression" value="1 0 0 * * ?"/>
+    </bean>
+
+
+    <bean name="sweepStaleDataJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+        <property name="jobClass" value="hn.join.fieldwork.service.SweepStaleDataJob"/>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="sweepStaleDataTask" value-ref="sweepStaleDataTask"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="sweepStaleDataCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="sweepStaleDataJob"/>
+        <property name="cronExpression" value="1 0 0 * * ?"/>
+    </bean>
+
+
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+
+        <property name="triggers">
+            <list>
+                <ref bean="checkinCronTrigger"/>
+                <ref bean="orderTokenCronTrigger"/>
+                <ref bean="sweepStaleDataCronTrigger"/>
+            </list>
+        </property>
+    </bean>
+
+
+</beans>

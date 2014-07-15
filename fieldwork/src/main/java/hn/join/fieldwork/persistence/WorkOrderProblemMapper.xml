@@ -1,0 +1,74 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hn.join.fieldwork.persistence.WorkOrderProblemMapper">
+
+	<resultMap type="hn.join.fieldwork.domain.WorkOrderProblem" id="problemMap">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="work_order_no" property="workOrderNo" jdbcType="VARCHAR" />
+		<result column="sid" property="sId" jdbcType="BIGINT" />
+		<result column="problem_type_id" property="problemTypeId" jdbcType="INTEGER" />
+		<result column="problem_category_id" property="problemCategoryId" jdbcType="INTEGER" />
+		<result column="problem_detail" property="problemDetail" jdbcType="VARCHAR" />
+		<result column="solution_method" property="solutionMethod" jdbcType="VARCHAR" />
+		<result column="problem_type_name" property="problemTypeName" jdbcType="VARCHAR" />
+		<result column="problem_category_name" property="problemCategoryName" jdbcType="VARCHAR" />
+	</resultMap>
+
+
+	<select id="getByWorkOrderNo" parameterType="java.lang.String"	resultMap="problemMap">
+		select tbl_work_order_problem.id,tbl_work_order_problem.work_order_no,tbl_work_order_problem.sid,tbl_work_order_problem.problem_type_id,tbl_problem_type.problem_type_name,tbl_work_order_problem.problem_category_id,tbl_problem_category.problem_category_name,tbl_work_order_problem.problem_detail,tbl_work_order_problem.solution_method 
+	    from tbl_work_order_problem inner join tbl_problem_category on tbl_work_order_problem.problem_category_id = tbl_problem_category.problem_category_id inner join tbl_problem_type on tbl_work_order_problem.problem_type_id=tbl_problem_type.problem_type_id 
+		where tbl_work_order_problem.work_order_no=#{workOrderNo}
+	</select>
+
+	<select id="getById" parameterType="java.lang.Integer"	resultMap="problemMap">
+		select id,work_order_no,sid,problem_type_id,problem_category_id,problem_detail
+		from tbl_work_order_problem where id=#{problemId}
+	</select>
+
+	<insert id="insertProblem" parameterType="hn.join.fieldwork.domain.WorkOrderProblem">
+		<selectKey resultType="java.lang.Integer" keyProperty="id"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO
+		tbl_work_order_problem(work_order_no,sid,problem_type_id,problem_category_id,problem_detail,product_id,product_name)
+		values(#{workOrderNo,jdbcType=VARCHAR},#{sId,jdbcType=INTEGER},#{problemTypeId,jdbcType=INTEGER},#{problemCategoryId,jdbcType=INTEGER},#{problemDetail,jdbcType=VARCHAR},#{productId,jdbcType=VARCHAR},#{productName,jdbcType=VARCHAR})
+	</insert>
+	
+	
+
+	<insert id="insertProblems" parameterType="java.util.List">
+		INSERT INTO
+		tbl_work_order_problem(work_order_no,sid,problem_type_id,problem_category_id,problem_detail,product_id,product_name)
+		VALUES
+		<foreach collection="list" item="problem" index="index"
+			separator=",">
+			(#{problem.workOrderNo,jdbcType=VARCHAR},#{problem.sId,jdbcType=INTEGER},#{problem.problemTypeId,jdbcType=INTEGER},#{problem.problemCategoryId,jdbcType=INTEGER},#{problem.problemDetail,jdbcType=VARCHAR},#{problem.productId,jdbcType=VARCHAR},#{problem.productName,jdbcType=VARCHAR})
+		</foreach>
+	</insert>
+	
+	<update id="updateProblemList" parameterType="hn.join.fieldwork.domain.WorkOrderProblem">
+		UPDATE tbl_work_order_problem	set
+			problem_type_id=#{problemTypeId,jdbcType=INTEGER},
+			problem_category_id=#{problemCategoryId,jdbcType=INTEGER},
+			problem_detail=#{problemDetail,jdbcType=VARCHAR},
+			product_id=#{productId,jdbcType=VARCHAR},
+			product_name=#{productName,jdbcType=VARCHAR} 
+		where work_order_no=#{workOrderNo} and sid=#{sId} 
+	</update>
+
+	<update id="updateProblem" parameterType="hn.join.fieldwork.domain.WorkOrderProblem">
+		UPDATE tbl_work_order_problem	set
+			problem_type_id=#{problemTypeId,jdbcType=INTEGER},
+			problem_category_id=#{problemCategoryId,jdbcType=INTEGER},
+			problem_detail=#{problemDetail,jdbcType=VARCHAR},
+			solution_method=#{solutionMethod,jdbcType=VARCHAR},
+			product_id=#{productId,jdbcType=VARCHAR}
+		where work_order_no=#{workOrderNo} and sid=#{sId} 
+	</update>
+
+
+
+</mapper>
